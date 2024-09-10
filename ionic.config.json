@@ -1,0 +1,7 @@
+{
+  "name": "petMap",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
