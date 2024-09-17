@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-dog-filled',
+  selector: 'app-dog-filled-icon',
   templateUrl: './dog-filled.component.html',
   styleUrls: ['./dog-filled.component.scss'],
 })
