@@ -23,7 +23,7 @@ export class MapComponent implements OnInit {
       element: this.mapRef.nativeElement,
       apiKey: environment.apiKey,
       config: {
-        styles: [],
+        // styles: [],
         center: {
           lat: 33.6,
           lng: -117.9,

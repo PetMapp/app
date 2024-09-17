@@ -1,0 +1,15 @@
+.header-auth {
+  height: 30vh;
+  position: relative;
+  top: 0px;
+  width: 100%;
+  background: var(--primary-sky) !important;
+  border-radius: 0 0 10px 12px;
+}
+
+.footer-gray {
+  background: var(--footer-gray) !important;
+  border-top: solid 1px #565656;
+  padding: 18px;
+  text-align: center;
+}

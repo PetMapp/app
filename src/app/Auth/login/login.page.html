@@ -1,0 +1,36 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+  <div [ngClass]="'header-auth'">
+
+  </div>
+
+
+  <div [ngClass]="'container pt-3'">
+    <div class="form-gap">
+      <h3 class="bold">login</h3>
+      <ion-input label="Login" [(ngModel)]="email" [labelPlacement]="'floating'" type="email"
+        fill="outline"></ion-input>
+
+      <ion-input label="Senha" [(ngModel)]="senha" [labelPlacement]="'floating'" type="password"
+        fill="outline"></ion-input>
+
+      <div style="width: 100%;">
+        <ion-button style="width: 100%;" (click)="onLogin()">Entrar</ion-button>
+        
+        <ion-loading [isOpen]="false" message="Carregando..." spinner="crescent">
+        </ion-loading>
+      
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+
+<ion-footer class="footer-gray">
+  Não tem uma conta? <b (click)="onRegister()">Cadastrar</b>
+</ion-footer>
