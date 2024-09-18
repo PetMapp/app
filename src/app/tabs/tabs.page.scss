@@ -4,10 +4,10 @@ ion-tabs {
 }
 
 ion-tab-bar {
-    width: 250px;
+    width: 250px; /* Diminui a largura do tab bar */
     background-color: transparent;
     border-top: 1px solid transparent;
-    margin: 0 auto;
+    margin: 0 auto; /* Centraliza o tab bar */
     display: flex;
     justify-content: space-between;
 }
