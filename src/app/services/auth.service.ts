@@ -36,7 +36,9 @@ export class AuthService {
     }
   }
 
-  getAuthState() {
-    return this.afAuth.authState;
+  async getAuthState(): Promise<firebase.User | null> {
+    var e = await this.afAuth.currentUser;
+    console.log(e);
+    return e;
   }
 }
