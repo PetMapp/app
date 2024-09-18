@@ -21,10 +21,21 @@
 
       <div style="width: 100%;">
         <ion-button style="width: 100%;" (click)="onLogin()">Entrar</ion-button>
-        
-        <ion-loading [isOpen]="false" message="Carregando..." spinner="crescent">
+
+        <ion-loading [isOpen]="loading" [message]="loading_text" spinner="crescent">
         </ion-loading>
-      
+
+        <div class="d-flex justify-content-between w-100">
+          <div></div>
+          OU
+          <div></div>
+        </div>
+
+
+        <ion-button (click)="onGoogle()">
+          G
+        </ion-button>
+
       </div>
     </div>
   </div>
