@@ -17,6 +17,7 @@ import { MapComponent } from '../map/map.component';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule
   ],
-  declarations: [Tab1Page, MapComponent]
+  declarations: [Tab1Page, MapComponent],
+  exports: [MapComponent]
 })
 export class Tab1PageModule {}

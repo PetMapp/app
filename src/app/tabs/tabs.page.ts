@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
@@ -10,9 +12,12 @@ export class TabsPage implements OnInit {
 
   currentRoute = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private auth: AuthService,
+    private nav: NavController
+  ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     // Obtém a rota atual
     this.currentRoute = this.router.url;
 
@@ -23,6 +28,8 @@ export class TabsPage implements OnInit {
         console.log('Rota atual:', this.currentRoute);
       }
     });
+
+    await this.auth.validateAuth();
   }
 
   isActive(tab: string): boolean {

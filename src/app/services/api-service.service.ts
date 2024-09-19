@@ -42,4 +42,9 @@ export class ApiServiceService {
     console.error('Erro na requisição:', error);
     // Você pode implementar uma lógica de tratamento de erros aqui (ex: mostrar alertas)
   }
+
+  //Serve para cadastrar o token do usuário no cabeçalho.
+  public registerHeader(token: string) {
+    this.axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  }
 }
