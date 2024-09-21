@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiKey: "AIzaSyD-XNQijUNr1Of6p4qXANFIb5aFpd5-MyQ",
+  apiKey: "AIzaSyDbIP8cBMs5YKb9lQIPeDSXBP7Z5AOpI_4",
   ApiBaseUrl: "https://localhost:3000/",
   firebaseConfig: {
     apiKey: "AIzaSyBqAgj1i9CeDOSLvrmzoyjQAFlomWMyX0s",

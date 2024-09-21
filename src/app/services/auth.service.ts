@@ -17,22 +17,45 @@ export class AuthService {
     private nav: NavController) {
 
     // Definindo a persistência para 'local' (mantém a sessão ativa mesmo após recarregar a página)
-    this.afAuth.setPersistence('local')
+    this.afAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
       .then(() => {
         console.log('Persistência definida para local.');
       })
       .catch((error) => {
         console.error('Erro ao definir persistência: ', error);
+        return this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+          .then(() => {
+            console.log('Persistência definida para SESSION.');
+          })
+          .catch((error) => {
+            console.error('Erro ao definir persistência SESSION: ', error);
+            // Se a sessão também falhar, define como 'none'
+            return this.afAuth.setPersistence(firebase.auth.Auth.Persistence.NONE);
+          })
       });
   }
 
   async googleLogin(): Promise<void> {
+    const provider = new firebase.auth.GoogleAuthProvider();
+  
     try {
-      var t = await this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-      console.log('Login com Google realizado com sucesso!');
+      if (this.isPopupSupported()) {
+        // Tenta login com Popup
+        await this.afAuth.signInWithPopup(provider);
+        console.log('Login com Google realizado com sucesso usando Popup!');
+      } else {
+        // Se o popup não for suportado, tenta com Redirect
+        await this.afAuth.signInWithRedirect(provider);
+        console.log('Login com Google realizado com sucesso usando Redirect!');
+      }
     } catch (error) {
       console.error('Erro no login com Google:', error);
     }
+  }
+
+  isPopupSupported(): boolean {
+    // Verifica se o ambiente suporta popup (browsers desktop, por exemplo)
+    return !(window.navigator.userAgent.includes('iPhone') || window.navigator.userAgent.includes('Android'));
   }
 
   async login(email: string, senha: string) {
@@ -62,7 +85,7 @@ export class AuthService {
         var t = await user.getIdToken();
         this.api.registerHeader(t);
       } else {
-        this.nav.navigateRoot("/login");
+        // this.nav.navigateRoot("/login");
       }
     } catch (error) {
       console.error('Erro ao validar auth:', error);
