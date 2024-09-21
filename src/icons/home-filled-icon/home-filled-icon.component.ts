@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-home-filled-icon',
@@ -6,8 +7,12 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./home-filled-icon.component.scss']
 })
 export class HomeFilledIconComponent {
-  @Input() color: string = 'black';
   @Input() width: string = '30';
   @Input() height: string = '30';
-  @Input() viewBox: string = '0 0 30 30'; // Adicione a propriedade viewBox
+
+  constructor(private themeService: ThemeService) {}
+
+  get fillColor(): string {
+    return this.themeService.getTheme() === 'dark' ? 'white' : 'black';
+  }
 }
