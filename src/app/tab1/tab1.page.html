@@ -6,18 +6,19 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-content [fullscreen]="true">
+<ion-content style="background: transparent;" [fullscreen]="true">
   
-  <ion-header collapse="condense">
+  <!-- <ion-header collapse="condense" style>
+  </ion-header>  -->
     <!--
     <ion-toolbar>
       <ion-title size="large">Tab 1</ion-title>
     </ion-toolbar> -->
-  </ion-header> 
 
   <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
-
+  <div style="width: 100%; height: 100%; background-color: transparent;">
+    <app-map [userLat]="userLat" [userLng]="userLng" />
+  </div>
 
   
 </ion-content>
-<app-map [userLat]="userLat" [userLng]="userLng" />

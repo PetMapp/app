@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
 import { GoogleMap } from '@capacitor/google-maps';
 import { environment } from 'src/environments/environment';
 
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./map.component.scss'],
 })
 
-export class MapComponent implements OnInit, OnChanges {
+export class MapComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('map', { static: true })
   mapRef!: ElementRef<HTMLElement>;
   newMap!: GoogleMap;
@@ -20,9 +20,15 @@ export class MapComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnInit(): void {
-    if (this.userLat !== 0 && this.userLng !== 0) {
+    // if (this.userLat !== 0 && this.userLng !== 0) {
+    //   this.createMap();
+    // }
+  }
+
+  ngAfterViewInit(){
+    setTimeout(() => {
       this.createMap();
-    }
+    }, 1000);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -30,7 +36,9 @@ export class MapComponent implements OnInit, OnChanges {
       if (this.newMap) {
         this.updateMapCenter();
       } else if (this.userLat !== 0 && this.userLng !== 0) {
-        this.createMap();
+        setTimeout(() => {
+          this.createMap();
+        }, 1000);
       }
     }
   }
@@ -40,6 +48,7 @@ export class MapComponent implements OnInit, OnChanges {
       id: 'my-cool-map',
       element: this.mapRef.nativeElement,
       apiKey: environment.apiKey,
+      forceCreate: true,
       config: {
         center: {
           lat: this.userLat,
@@ -48,6 +57,8 @@ export class MapComponent implements OnInit, OnChanges {
         zoom: 8,
       },
     });
+    this.newMap.enableTrafficLayer(true);
+    this.newMap.disableClustering();
   }
 
   async updateMapCenter() {
@@ -58,7 +69,7 @@ export class MapComponent implements OnInit, OnChanges {
           lng: this.userLng,
         },
         zoom: 8,
-        animate: true,
+        animate: false,
       });
     }
   }
