@@ -1,5 +1,5 @@
 import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
@@ -18,6 +18,7 @@ import { MapComponent } from '../map/map.component';
     Tab1PageRoutingModule
   ],
   declarations: [Tab1Page, MapComponent],
-  exports: [MapComponent]
+  exports: [MapComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Tab1PageModule {}

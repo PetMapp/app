@@ -7,18 +7,21 @@
 </ion-header> -->
 
 <ion-content style="background: transparent;" [fullscreen]="true">
-  
+
   <!-- <ion-header collapse="condense" style>
   </ion-header>  -->
-    <!--
+  <!--
     <ion-toolbar>
       <ion-title size="large">Tab 1</ion-title>
     </ion-toolbar> -->
 
   <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
   <div style="width: 100%; height: 100%; background-color: transparent;">
-    <app-map [userLat]="userLat" [userLng]="userLng" />
+    <!-- <app-map [userLat]="userLat" [userLng]="userLng" /> -->
+    <capacitor-google-map id="map" style="display: block; width: 100%; height: 100%;">
+      
+    </capacitor-google-map>
   </div>
 
-  
+
 </ion-content>
