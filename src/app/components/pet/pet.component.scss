@@ -1,0 +1,45 @@
+ion-card {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+ion-card {
+    width: 100%;
+    height: auto;
+    padding-left: 20px;
+    padding-right: 40px;
+    background-color: transparent;
+}
+
+.pet-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
+
+.user-foto {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+}
+
+ion-card-content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.petNome {
+    font-weight: bold;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #D9D9D9;
+    margin: 10px 0;
+    opacity: 20%;
+}
