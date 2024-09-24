@@ -7,8 +7,6 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 
-import { MapComponent } from '../map/map.component';
-
 @NgModule({
   imports: [
     IonicModule,
@@ -17,8 +15,7 @@ import { MapComponent } from '../map/map.component';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule
   ],
-  declarations: [Tab1Page, MapComponent],
-  exports: [MapComponent],
+  declarations: [Tab1Page],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Tab1PageModule {}

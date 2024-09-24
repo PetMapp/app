@@ -4,12 +4,12 @@
     --footer-gray: #f9f9f9;
     --primary-sky: #DEEFE7;
     --ion-border: #000;
+    --ion-background-color: #fff !important;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --footer-gray: #383838;
-    }
+body {
+    background: transparent !important;
+    --ion-background-color: transparent !important;
 }
 
 .form-gap {
