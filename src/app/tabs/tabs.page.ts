@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NavController } from '@ionic/angular';
+import { GooglemapService } from '../services/googlemap.service';
 
 @Component({
   selector: 'app-tabs',
@@ -14,6 +15,7 @@ export class TabsPage implements OnInit {
 
   constructor(private router: Router,
     private auth: AuthService,
+    private googleMapService: GooglemapService,
     private nav: NavController
   ) { }
 
@@ -26,6 +28,11 @@ export class TabsPage implements OnInit {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;
         console.log('Rota atual:', this.currentRoute);
+        if(this.currentRoute != "/tabs/tab1"){
+          this.googleMapService.destroyMap();
+        } else{
+          this.googleMapService.createMap();
+        }
       }
     });
 
