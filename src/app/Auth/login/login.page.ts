@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -15,10 +16,22 @@ export class LoginPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private authService: AuthService
+    private authService: AuthService,
+    private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit() {
+    this.afAuth.getRedirectResult()
+      .then(result => {
+        if (result.user) {
+          console.log('Login com redirecionamento bem-sucedido:', result.user);
+          this.navCtrl.navigateForward("/tabs/tab1")
+          // Navegue para a página principal ou atualize o estado do usuário
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao obter resultado do redirecionamento:', error);
+      });
   }
 
   onRegister() {

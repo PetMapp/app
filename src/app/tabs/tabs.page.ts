@@ -19,7 +19,9 @@ export class TabsPage implements OnInit {
     private googleMapService: GooglemapService,
     private locationService: LocationService,
     private nav: NavController
-  ) { }
+  ) {
+    this.auth.validateAuth();
+  }
 
   async ngOnInit() {
     // Obtém a rota atual
@@ -42,7 +44,7 @@ export class TabsPage implements OnInit {
       }
     });
 
-    await this.auth.validateAuth();
+    
   }
 
   isActive(tab: string): boolean {
