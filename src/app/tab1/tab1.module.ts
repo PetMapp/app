@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
+import { ButtonComponent } from '../components/button/button.component';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 
 @NgModule({
@@ -15,7 +15,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     ExploreContainerComponentModule,
     Tab1PageRoutingModule
   ],
-  declarations: [Tab1Page],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  declarations: [Tab1Page, ButtonComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [ButtonComponent]
 })
 export class Tab1PageModule {}
