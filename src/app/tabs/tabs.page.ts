@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NavController } from '@ionic/angular';
 import { GooglemapService } from '../services/googlemap.service';
+import { LocationService } from '../services/location.service';
 
 @Component({
   selector: 'app-tabs',
@@ -16,6 +17,7 @@ export class TabsPage implements OnInit {
   constructor(private router: Router,
     private auth: AuthService,
     private googleMapService: GooglemapService,
+    private locationService: LocationService,
     private nav: NavController
   ) { }
 
@@ -24,14 +26,18 @@ export class TabsPage implements OnInit {
     this.currentRoute = this.router.url;
 
     // Verifica mudanças na rota apenas após a navegação ser concluída
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe(async(event) => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;
         console.log('Rota atual:', this.currentRoute);
+
+        //Tratativa de renderização do mapa
         if(this.currentRoute != "/tabs/tab1"){
           this.googleMapService.destroyMap();
         } else{
-          this.googleMapService.createMap();
+          await this.googleMapService.createMap();
+          var location = await this.locationService.getLocation();
+          this.googleMapService.setPositionCamera(location.coords.latitude, location.coords.longitude);
         }
       }
     });

@@ -33,15 +33,16 @@ export class LocationService {
     }
   }
 
-  async getLocation() {
+  async getLocation(): Promise<Position> {
     if (this.platform.is('capacitor')) {
       return await Geolocation.getCurrentPosition({
         enableHighAccuracy: true, // Tentar obter maior precisão
+        timeout: 10000
       });
     } else {
       return new Promise<any>((resolve, reject) => {
         if (navigator.geolocation) {
-          navigator.geolocation.watchPosition(
+          navigator.geolocation.getCurrentPosition(
             (position) => {
               if (position.coords.accuracy) {
                 // Considera a localização boa se a precisão for menor que 100 metros
@@ -62,7 +63,7 @@ export class LocationService {
             },
             {
               enableHighAccuracy: true,
-              timeout: 5000,
+              timeout: 10000,
               maximumAge: 0,
             }
           );
