@@ -20,40 +20,29 @@ export class LoginPage implements OnInit {
     private afAuth: AngularFireAuth
   ) { }
 
-  ngOnInit() {
-    this.afAuth.getRedirectResult()
-      .then(result => {
-        if (result.user) {
-          console.log('Login com redirecionamento bem-sucedido:', result.user);
-          this.navCtrl.navigateForward("/tabs/tab1")
-          // Navegue para a página principal ou atualize o estado do usuário
-        }
-      })
-      .catch(error => {
-        console.error('Erro ao obter resultado do redirecionamento:', error);
-      });
-  }
+  ngOnInit() {}
 
   onRegister() {
     this.navCtrl.navigateForward("/register");
   }
 
-  async onGoogle(){
+  async onGoogle() {
     await this.authService.googleLogin();
-    this.navCtrl.navigateForward("/tabs/tab1");
+    await this.navCtrl.navigateRoot("/tabs/tab1");
+
   }
 
   async onLogin() {
-      try {
-        this.loading = true;
-        this.loading_text = "Entrando...";
-        await this.authService.login(this.email, this.senha);
-        this.navCtrl.navigateForward("/tabs/tab1");
-        this.loading = false;
-      } catch (error) {
-        
-      }
+    try {
+      this.loading = true;
+      this.loading_text = "Entrando...";
+      await this.authService.login(this.email, this.senha);
       this.loading = false;
+      this.navCtrl.navigateForward("/tabs/tab1");
+    } catch (error) {
+
+    }
+    this.loading = false;
   }
 
 }

@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth'
 import firebase from 'firebase/compat/app';
+import { Capacitor } from '@capacitor/core'
 import { firstValueFrom } from 'rxjs'; // Importa a função para converter observable em promise
 import { ApiServiceService } from './api-service.service';
 import { NavController } from '@ionic/angular';
+import { GoogleAuth, User, } from '@codetrix-studio/capacitor-google-auth'
+import { signInWithCredential, Auth, GoogleAuthProvider } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -15,54 +18,52 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private api: ApiServiceService,
     private nav: NavController) {
+    GoogleAuth.initialize({
+      clientId: "241531833745-1pqtns7494nd9bjkptmb672bcgstvsrq.apps.googleusercontent.com",
+      scopes: ["profile", "email"]
+    });
 
-      this.afAuth.setPersistence('none')
+    // Definindo a persistência para 'local' (mantém a sessão ativa mesmo após recarregar a página)
+    // Definindo a persistência para 'SESSION' ou 'LOCAL'
+    this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION) // ou SESSION
       .then(() => {
-        console.log('Persistência definida para none.');
+        console.log('Persistência definida com sucesso.');
       })
       .catch((error) => {
-        console.error('Erro ao definir persistência: ', error);
+        console.error('Erro ao definir persistência:', error);
       });
-
-    // // Definindo a persistência para 'local' (mantém a sessão ativa mesmo após recarregar a página)
-    // this.afAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    //   .then(() => {
-    //     console.log('Persistência definida para local.');
-    //   })
-    //   .catch((error) => {
-    //     console.error('Erro ao definir persistência: ', error);
-    //     return this.afAuth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
-    //       .then(() => {
-    //         console.log('Persistência definida para SESSION.');
-    //       })
-    //       .catch((error) => {
-    //         console.error('Erro ao definir persistência SESSION: ', error);
-    //         // Se a sessão também falhar, define como 'none'
-    //         return this.afAuth.setPersistence(firebase.auth.Auth.Persistence.NONE);
-    //       })
-    //   });
   }
+
 
   async googleLogin(): Promise<void> {
     const provider = new firebase.auth.GoogleAuthProvider();
-    try {
-      if (this.isPopupSupported()) {
-        // Tenta login com Popup
-        await this.afAuth.signInWithPopup(provider);
-        console.log('Login com Google realizado com sucesso usando Popup!');
-      } else {
-        // Se o popup não for suportado, tenta com Redirect
-        //  var e = await this.afAuth.signInWithPopup(provider);
-        //  await this.afAuth.getRedirectResult();
-        if (this.isSessionStorageAvailable()) {
-          this.afAuth.signInWithPopup(provider);
-        } else {
-          alert('Não é possível usar signInWithRedirect devido à indisponibilidade do sessionStorage.')
-        }
 
+    // Verifica se a plataforma é nativa (Android ou iOS)
+    if (Capacitor.isNativePlatform()) {
+      try {
+        // Para Android (ou dispositivos móveis)
+        const user: User = await GoogleAuth.signIn();
+
+        // Usa o token de autenticação do Google para gerar a credencial no Firebase
+        const credential = firebase.auth.GoogleAuthProvider.credential(user.authentication.idToken);
+
+        // Realiza o login no Firebase com o credential gerado
+        await this.afAuth.signInWithCredential(credential);
+
+        console.log('Login com Google no Android/iOS realizado com sucesso!');
+
+      } catch (error) {
+        console.error('Erro no login com Google no Android/iOS:', error);
       }
-    } catch (error) {
-      console.error('Erro no login com Google:', error);
+    } else {
+      // Para Web
+      try {
+        // Realiza o login com Google usando o popup no navegador
+        await this.afAuth.signInWithPopup(provider);
+        console.log('Login com Google na Web realizado com sucesso!');
+      } catch (error) {
+        console.error('Erro no login com Google na Web:', error);
+      }
     }
   }
 
@@ -104,18 +105,25 @@ export class AuthService {
   }
 
 
-  async validateAuth(): Promise<firebase.User | null | void> {
+  async validateAuth(): Promise<firebase.User | null> {
     try {
-      var user = await firstValueFrom(this.afAuth.authState); // Retorna o primeiro valor do authState
+      // Usar o Observable para obter o estado de autenticação atualizado
+      const user = await firstValueFrom(this.afAuth.user);
+
       if (user) {
-        var t = await user.getIdToken();
-        this.api.registerHeader(t);
+        console.log('Usuário autenticado:', user);
+        const idToken = await user.getIdToken();
+        console.log('ID Token:', idToken);
+        return user;
       } else {
+        // Redireciona para login se não estiver autenticado
         this.nav.navigateRoot("/login");
+        return null;
       }
     } catch (error) {
       console.error('Erro ao validar auth:', error);
       return null;
     }
   }
+
 }
