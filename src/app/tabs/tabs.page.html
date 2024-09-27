@@ -5,33 +5,33 @@
     <!-- Tab 1 -->
     <ion-tab-button tab="tab1" href="/tabs/tab1">
       <ng-container *ngIf="isActive('/tabs/tab1'); else defaultIcon">
-        <app-home-filled-icon color="black" width="30" height="30"></app-home-filled-icon>
+        <ion-icon name="home" size="large" style="color: var(--icon-color-default);"></ion-icon>
       </ng-container>
 
       <ng-template #defaultIcon>
-        <app-home-icon color="black" width="30" height="30"></app-home-icon>
+        <ion-icon name="home-outline" size="large" style="color: var(--icon-color-default);"></ion-icon>
       </ng-template>
     </ion-tab-button>
 
     <!-- Tab 2 -->
     <ion-tab-button tab="tab2" href="/tabs/tab2">
       <ng-container *ngIf="isActive('/tabs/tab2'); else defaultIcon2">
-        <app-alarm-filled-icon color="black" width="26" height="26" viewBox="0 0 26 26"></app-alarm-filled-icon>
+        <ion-icon name="notifications" size="large" style="color: var(--icon-color-default);"></ion-icon>
       </ng-container>
 
       <ng-template #defaultIcon2>
-        <app-alarm-icon color="black" width="26" height="26" viewBox="0 0 26 26"></app-alarm-icon>
+        <ion-icon name="notifications-outline" size="large" style="color: var(--icon-color-default);"></ion-icon>
       </ng-template>
     </ion-tab-button>
 
     <!-- Tab 3 -->
     <ion-tab-button tab="tab3" href="/tabs/tab3">
       <ng-container *ngIf="isActive('/tabs/tab3'); else defaultIcon3">
-        <app-dog-filled-icon color="black" width="26" height="26" viewBox="0 0 26 26"></app-dog-filled-icon>
+        <ion-icon name="paw" size="large" style="color: var(--icon-color-default);"></ion-icon>
       </ng-container>
 
       <ng-template #defaultIcon3>
-        <app-dog-icon color="black" width="26" height="26" viewBox="0 0 26 26"></app-dog-icon>
+        <ion-icon name="paw-outline" size="large" style="color: var(--icon-color-default);"></ion-icon>
       </ng-template>
     </ion-tab-button>
   </ion-tab-bar>

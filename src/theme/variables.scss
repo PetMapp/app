@@ -1,11 +1,30 @@
 :root {
-    --ion-color-primary: #159A9C;
+    --ion-color-primary: #159a9c;
     --ion-color-dark: #002333;
     --footer-gray: #f9f9f9;
-    --primary-sky: #DEEFE7;
+    --primary-sky: #bcd6ca;
     --ion-border: #000;
+    --button-custom-color: #fff;
+    --icon-color-default: #2b2b2b;
     --ion-background-color: #fff !important;
+    --hr-color: rgba(0, 0, 0, 0.3);
+    --google-button: #fff ;
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ion-background-color: #2b2b2b !important;
+        --button-custom-color: #2b2b2b !important;
+        --icon-color-default: #f9f9f9;
+        --google-button:#121212;
+        --hr-color: rgba(255, 255, 255, 0.3);
+    }
+}
+
+.custom-button {
+    --background: var(--button-custom-color);
+    --color: var(--ion-background-color);   
+  }
 
 body {
     background: transparent !important;
