@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild, Renderer2, OnDestroy } from '@angular/core';
-import { AuthService } from '../services/auth.service';
-import { LocationService } from '../services/location.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ApiServiceService } from '../services/api-service.service';
+import { PetLocationModel } from '../models/pet-location-model';
 import { GooglemapService } from '../services/googlemap.service';
+
 
 @Component({
   selector: 'app-tab1',
@@ -11,11 +12,12 @@ import { GooglemapService } from '../services/googlemap.service';
 export class Tab1Page implements OnInit {
   @ViewChild('map', { static: true }) mapRef!: ElementRef<HTMLElement>;
   constructor(
-    private auth: AuthService,
-    private location: LocationService,
-    private googleMapService: GooglemapService
+    private api: ApiServiceService,
+    private googlemap: GooglemapService
   ) { }
 
-  async ngOnInit() {}
-
+  async ngOnInit() {
+    var pets = await this.api.get<PetLocationModel>("pet/location/all");
+    console.log({pets});
+  }
 }

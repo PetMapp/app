@@ -6,7 +6,6 @@ import { firstValueFrom } from 'rxjs'; // Importa a função para converter obse
 import { ApiServiceService } from './api-service.service';
 import { NavController } from '@ionic/angular';
 import { GoogleAuth, User, } from '@codetrix-studio/capacitor-google-auth'
-import { signInWithCredential, Auth, GoogleAuthProvider } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -35,34 +34,35 @@ export class AuthService {
   }
 
 
-  async googleLogin(): Promise<void> {
+  async googleLogin(): Promise<string | null> {
     const provider = new firebase.auth.GoogleAuthProvider();
 
     // Verifica se a plataforma é nativa (Android ou iOS)
     if (Capacitor.isNativePlatform()) {
       try {
         // Para Android (ou dispositivos móveis)
-        const user: User = await GoogleAuth.signIn();
+        var user = await GoogleAuth.signIn();
+          
+            // Usa o token de autenticação do Google para gerar a credencial no Firebase
+            const credential = firebase.auth.GoogleAuthProvider.credential(user.authentication.idToken);
+            // Realiza o login no Firebase com o credential gerado
+            await this.afAuth.signInWithCredential(credential);
 
-        // Usa o token de autenticação do Google para gerar a credencial no Firebase
-        const credential = firebase.auth.GoogleAuthProvider.credential(user.authentication.idToken);
-
-        // Realiza o login no Firebase com o credential gerado
-        await this.afAuth.signInWithCredential(credential);
-
-        console.log('Login com Google no Android/iOS realizado com sucesso!');
-
+            console.log(user);
+            console.log('Login com Google no Android/iOS realizado com sucesso!');
+          
+            return user.id;
       } catch (error) {
-        console.error('Erro no login com Google no Android/iOS:', error);
+        return null;
       }
     } else {
       // Para Web
       try {
         // Realiza o login com Google usando o popup no navegador
-        await this.afAuth.signInWithPopup(provider);
-        console.log('Login com Google na Web realizado com sucesso!');
+        var u = await this.afAuth.signInWithPopup(provider);
+        return u.user?.getIdToken() ?? null;
       } catch (error) {
-        console.error('Erro no login com Google na Web:', error);
+        return null;
       }
     }
   }
@@ -73,7 +73,8 @@ export class AuthService {
   }
 
   async login(email: string, senha: string) {
-    await this.afAuth.signInWithEmailAndPassword(email, senha);
+    var e = await this.afAuth.signInWithEmailAndPassword(email, senha);
+    if (e.user) this.api.registerHeader(e.user.uid);
   }
 
   // Logout
@@ -109,11 +110,9 @@ export class AuthService {
     try {
       // Usar o Observable para obter o estado de autenticação atualizado
       const user = await firstValueFrom(this.afAuth.user);
-
       if (user) {
-        console.log('Usuário autenticado:', user);
         const idToken = await user.getIdToken();
-        console.log('ID Token:', idToken);
+        this.api.registerHeader(idToken);
         return user;
       } else {
         // Redireciona para login se não estiver autenticado

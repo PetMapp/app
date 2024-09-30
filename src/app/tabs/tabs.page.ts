@@ -28,15 +28,15 @@ export class TabsPage implements OnInit {
     this.currentRoute = this.router.url;
 
     // Verifica mudanças na rota apenas após a navegação ser concluída
-    this.router.events.subscribe(async(event) => {
+    this.router.events.subscribe(async (event) => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;
         console.log('Rota atual:', this.currentRoute);
 
         //Tratativa de renderização do mapa
-        if(this.currentRoute != "/tabs/tab1"){
+        if (this.currentRoute != "/tabs/tab1") {
           this.googleMapService.destroyMap();
-        } else{
+        } else {
           await this.googleMapService.createMap();
           var location = await this.locationService.getLocation();
           this.googleMapService.setPositionCamera(location.coords.latitude, location.coords.longitude);
@@ -44,7 +44,7 @@ export class TabsPage implements OnInit {
       }
     });
 
-    
+
   }
 
   isActive(tab: string): boolean {

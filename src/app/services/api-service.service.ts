@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { environment } from '../../environments/environment';  // Importa o arquivo de ambiente
+import { ToastController } from '@ionic/angular';
+import { ApiResponse } from '../models/api-response';
+import { firstValueFrom } from 'rxjs'; // Importa a função para converter observable em promise
+
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +13,10 @@ import { environment } from '../../environments/environment';  // Importa o arqu
 export class ApiServiceService {
   private axiosClient: AxiosInstance;
 
-  constructor() {
+  constructor(
+    private toastController: ToastController,
+    private afAuth: AngularFireAuth
+  ) {
     this.axiosClient = axios.create({
       baseURL: environment.ApiBaseUrl,
       timeout: 10000,
@@ -18,33 +26,95 @@ export class ApiServiceService {
     })
   }
 
-  async get<T>(endpoint: string): Promise<T> {
+  async get<T>(endpoint: string, anonimous: boolean = false): Promise<T | null> {
     try {
-      const response: AxiosResponse<T> = await this.axiosClient.get(endpoint);
-      return response.data;
+      if (!anonimous) {
+        var v = await this.applicationAuthorization();
+        if(v === false) return null;
+      }
+
+      const response = await this.axiosClient.get<ApiResponse<T>>(endpoint);
+      if (!response.data.success)
+        throw new Error(response.data.errorMessage || "");
+
+      return response.data.data;
     } catch (error) {
-      this.handleError(error);
-      throw error;
+      var responseError = error as AxiosError<ApiResponse<T>>;
+      console.log(responseError);
+      this.showToast(responseError.response?.data.errorMessage || "");
+      return null;
     }
   }
 
-  async post<T>(endpoint: string, data: any): Promise<T> {
+  async post<T>(endpoint: string, data: any, anonimous: boolean = false): Promise<T | null> {
     try {
+      if (!anonimous) {
+        var v = await this.applicationAuthorization();
+        if(v === false) return null;
+      }
+
       const response: AxiosResponse<T> = await this.axiosClient.post(endpoint, data);
       return response.data;
     } catch (error) {
-      this.handleError(error);
-      throw error;
+      var responseError = error as AxiosError<ApiResponse<T>>;
+      console.log(responseError);
+      this.showToast(responseError.response?.data.errorMessage || "");
+      return null;
     }
   }
 
-  private handleError(error: any): void {
-    console.error('Erro na requisição:', error);
-    // Você pode implementar uma lógica de tratamento de erros aqui (ex: mostrar alertas)
+  async put<T>(endpoint: string, data: any, anonimous: boolean = false): Promise<T | null> {
+    try {
+      if (!anonimous) {
+        var v = await this.applicationAuthorization();
+        if(v == null) return null;
+      }
+      const response: AxiosResponse<T> = await this.axiosClient.put(endpoint, data);
+      return response.data;
+    } catch (error) {
+      var responseError = error as AxiosError<ApiResponse<T>>;
+      this.showToast(responseError.response?.data.errorMessage || "");
+      return null;
+    }
   }
 
-  //Serve para cadastrar o token do usuário no cabeçalho.
+  async delete<T>(endpoint: string, data: any, anonimous: boolean = false): Promise<T | null> {
+    try {
+      if (!anonimous) {
+        var v = await this.applicationAuthorization();
+        if(v == null) return null;
+      }
+      const response: AxiosResponse<T> = await this.axiosClient.delete(endpoint, data);
+      return response.data;
+    } catch (error) {
+      var responseError = error as AxiosError<ApiResponse<T>>;
+      this.showToast(responseError.response?.data.errorMessage || "");
+      return null;
+    }
+  }
+
   public registerHeader(token: string) {
-    this.axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    this.axiosClient.defaults.headers.common['authorization'] = `Bearer ${token}`;
+  }
+
+  private async applicationAuthorization(): Promise<boolean> {
+    const user = await firstValueFrom(this.afAuth.user);
+    if (user) {
+      var e = await user.getIdToken();
+      this.registerHeader(e);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  private async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      color: 'danger'
+    });
+    toast.present();
   }
 }

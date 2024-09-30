@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GoogleMap } from '@capacitor/google-maps';
+import { GoogleMap, Marker } from '@capacitor/google-maps';
+import { MarkerClickCallbackData } from '@capacitor/google-maps/dist/typings/definitions';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -31,6 +32,8 @@ export class GooglemapService {
       id: 'my-app',
       apiKey: environment.apiKey,
       element: ref!,
+      forceCreate: true,
+      language: "pt-BR",
       config: {
         center: {
           lat: 0,
@@ -41,6 +44,7 @@ export class GooglemapService {
       }
     });
 
+    await this.newMap.enableClustering();
 
   }
 
@@ -62,6 +66,12 @@ export class GooglemapService {
     }
   }
 
+  public async SetMarkers(markers: Marker[], onClickMarker: (a: MarkerClickCallbackData) => any) {
+    if (this.newMap){
+      await this.newMap?.addMarkers(markers);
+      await this.newMap.setOnMarkerClickListener(onClickMarker);
+    }
+  }
 
 
   private getLightModeStyles(): google.maps.MapTypeStyle[] {
