@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { ApiServiceService } from 'src/app/services/api-service.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -18,8 +18,8 @@ export class LoginPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private authService: AuthService,
-    private afAuth: AngularFireAuth,
-    private api: ApiServiceService
+    private api: ApiServiceService,
+    private toast: ToastController
   ) { }
 
   ngOnInit() { }
@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
   async onGoogle() {
     await this.authService.googleLogin()
       .then(async (r) => {
-        if(r) {
+        if (r) {
           await this.api.registerHeader(r);
           await this.navCtrl.navigateRoot("/tabs/tab1");
         }
@@ -44,9 +44,16 @@ export class LoginPage implements OnInit {
       this.loading_text = "Entrando...";
       await this.authService.login(this.email, this.senha)
       this.loading = false;
-      // this.navCtrl.navigateForward("/tabs/tab1");
+      setTimeout(() => {
+        this.navCtrl.navigateRoot("/tabs/tab1");
+      }, 400);
     } catch (error) {
-
+      await this.toast.create({
+        message: "Login ou senha inválido",
+        duration: 3000,
+        position: 'bottom',
+        color: 'danger'
+      })
     }
     this.loading = false;
   }
