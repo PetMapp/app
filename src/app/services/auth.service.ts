@@ -16,7 +16,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private api: ApiServiceService,
-    private nav: NavController) {
+    private nav: NavController,
+  ) {
     GoogleAuth.initialize({
       clientId: "241531833745-1pqtns7494nd9bjkptmb672bcgstvsrq.apps.googleusercontent.com",
       scopes: ["profile", "email"]
@@ -32,6 +33,7 @@ export class AuthService {
         console.error('Erro ao definir persistência:', error);
       });
   }
+
 
 
   async googleLogin(): Promise<string | null> {
@@ -70,6 +72,15 @@ export class AuthService {
   isPopupSupported(): boolean {
     // Verifica se o ambiente suporta popup (browsers desktop, por exemplo)
     return !(window.navigator.userAgent.includes('iPhone') || window.navigator.userAgent.includes('Android'));
+  }
+
+  async register(email: string, password: string): Promise<void> {
+    try {
+      await this.afAuth.createUserWithEmailAndPassword(email, password);
+      console.log('Registro bem-sucedido!');
+    } catch (error) {
+      console.error('Erro ao registrar:', error);
+    }
   }
 
   async login(email: string, senha: string) {
@@ -124,5 +135,4 @@ export class AuthService {
       return null;
     }
   }
-
 }
