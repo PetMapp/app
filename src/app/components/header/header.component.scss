@@ -1,0 +1,22 @@
+ion-header {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 0px;
+  z-index: 999;
+  background-color: transparent;
+  height: 50px;
+}
+
+button {
+  width: auto;
+  height: auto;
+  padding: 10px;
+  background-color: transparent;
+  color: black;
+  bottom: 100px;
+  right: 0px;
+  border-radius: 5px;
+  filter: drop-shadow(0px 3px 4px rgb(0 0 0 / 15%));
+}
