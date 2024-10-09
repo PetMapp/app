@@ -35,16 +35,16 @@
       </ng-template>
     </ion-tab-button>
 
-  <!-- Tab 4 -->
-  <ion-tab-button tab="tab4" href="/tabs/tab4">
-    <ng-container *ngIf="isActive('/tabs/tab4'); else defaultIcon4">
-      <ion-icon name="person-circle" size="large" style="color: var(--icon-color-default);"></ion-icon>
-    </ng-container>
+    <!-- Tab 4 -->
+    <ion-tab-button tab="tab4" href="/tabs/tab4">
+      <ng-container *ngIf="isActive('/tabs/tab4'); else defaultIcon4">
+        <ion-icon name="person-circle" size="large" style="color: var(--icon-color-default);"></ion-icon>
+      </ng-container>
 
-    <ng-template #defaultIcon4>
-      <ion-icon name="person-circle-outline" size="large" style="color: var(--icon-color-default);"></ion-icon>
-    </ng-template>
-  </ion-tab-button>
-</ion-tab-bar>
+      <ng-template #defaultIcon4>
+        <ion-icon name="person-circle-outline" size="large" style="color: var(--icon-color-default);"></ion-icon>
+      </ng-template>
+    </ion-tab-button>
+  </ion-tab-bar>
 
 </ion-tabs>

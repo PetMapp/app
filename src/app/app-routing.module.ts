@@ -5,19 +5,27 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  },  {
+  },
+  {
     path: 'login',
-    loadChildren: () => import('./Auth/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./Auth/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'register',
-    loadChildren: () => import('./Auth/register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./Auth/register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'tab4',
-    loadChildren: () => import('./tab4/tab4.module').then( m => m.Tab4PageModule)
-  }
-
+    loadChildren: () => import('./tab4/tab4.module').then(m => m.Tab4PageModule)
+  },
+  // {
+  //   path: 'pets/register',
+  //   loadChildren: () => import('./pet-register/pet-register.module').then( m => m.PetRegisterPageModule)
+  // },
+  {
+    path: 'pets',
+    loadChildren: () => import('./pets/pets.module').then(m => m.PetsPageModule)
+  },
 ];
 @NgModule({
   imports: [
@@ -25,4 +33,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

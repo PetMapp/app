@@ -97,6 +97,8 @@ export class ApiServiceService {
     this.axiosClient.defaults.headers.common['authorization'] = `Bearer ${token}`;
   }
 
+
+
   private async applicationAuthorization(): Promise<boolean> {
     const user = await firstValueFrom(this.afAuth.user);
     if (user) {
