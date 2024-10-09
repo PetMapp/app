@@ -25,7 +25,11 @@ const routes: Routes = [
   {
     path: 'pets',
     loadChildren: () => import('./pets/pets.module').then(m => m.PetsPageModule)
+  },  {
+    path: 'search',
+    loadChildren: () => import('./search/search.module').then( m => m.SearchPageModule)
   },
+
 ];
 @NgModule({
   imports: [

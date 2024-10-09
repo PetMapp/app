@@ -7,5 +7,6 @@ ion-button {
   color: black;
   bottom: 100px;
   right: 20px;
-  border-radius: 15px;
+  border-radius: 10px;
+  filter: drop-shadow(0px 3px 4px rgb(0 0 0  / 15%));
 }
