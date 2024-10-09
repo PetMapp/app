@@ -1,13 +1,25 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>tab4</ion-title>
+  <ion-toolbar color="translucent">
+    <ion-title>Configurações</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tab4</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list lines="full">
+    <app-avatar-usuario 
+    [userName]="'Nome do usuário'">
+  </app-avatar-usuario>
+
+    <app-itens-config 
+      icon="contrast-outline" 
+      label="Aparência" 
+      link="#">
+    </app-itens-config >
+
+    <app-itens-config  
+      icon="person-outline" 
+      label="Informações do usuário" 
+      link="#">
+    </app-itens-config >
+  </ion-list>
 </ion-content>
