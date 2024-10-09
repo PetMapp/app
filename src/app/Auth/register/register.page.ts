@@ -32,14 +32,15 @@ export class RegisterPage implements OnInit {
   async onRegister() {
     try {
       if (this.senha !== this.confirmarSenha) {
-        this.toast.create({
+        const toast = await this.toast.create({
           message: "As senhas não coincidem",
-          duration: 3000,
+          duration: 3000, 
           position: 'bottom',
           color: 'danger'
         });
+        await toast.present();
         return;
-      } 
+      }
   
       this.loading = true;
       this.loading_text = "Registrando...";
@@ -50,11 +51,11 @@ export class RegisterPage implements OnInit {
       }, 400);
     } catch (error) {
       await this.toast.create({
-        message: "Login ou senha inválido",
+        message: "E-mail ou senha inválido",
         duration: 3000,
         position: 'bottom',
         color: 'danger'
-      })
+      });
     }
     this.loading = false;
   }
