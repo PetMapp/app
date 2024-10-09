@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab4',
@@ -6,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tab4.page.scss'],
 })
 export class Tab4Page implements OnInit {
+  usuarioLogado: any = null;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private navCtrl: NavController
+  ) {
+   }
 
   ngOnInit() {
+    this.loadUsuarioLogado();
+  }
+
+  loadUsuarioLogado () {
+    const user = this.authService.getUsuarioLogado();
+
+    if (user) {
+      this.usuarioLogado = user; 
+    } else {
+      this.navCtrl.navigateRoot('/login');
+    }
   }
 
 }

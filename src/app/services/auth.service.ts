@@ -135,4 +135,12 @@ export class AuthService {
       return null;
     }
   }
+  usuarioLogado: any = null;
+
+  getUsuarioLogado () {
+    const user = firebase.auth().currentUser;
+    return user;
+  }
 }
+
+
