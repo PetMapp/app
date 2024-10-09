@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-avatar-usuario',
@@ -7,4 +9,16 @@ import { Component, Input } from '@angular/core';
 })
 export class AvatarUsuarioComponent {
   @Input() userName: string = 'Nome do usuário';
+
+  constructor(
+    private authService: AuthService
+  ) { }
+
+  usuarioLogado() {
+    const usuario = this.authService.getUsuarioLogado();
+    return usuario ? usuario.displayName : this.userName;
+
+  }
+
 }
+
