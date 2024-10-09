@@ -1,8 +1,12 @@
 <ion-item lines="none">
-  <ion-avatar slot="start">
-    <img src="#" alt="avatar">
-  </ion-avatar>
+  <div class="avatar-container">
+    <ion-avatar slot="start">
+      <img [src]="usuario.fotoURL" alt="Foto do usuário" width="100">
+    </ion-avatar>
+  </div>
   <ion-label>
-    <h2></h2>
+    <h2>{{ usuario.displayName }}</h2>
+    <!-- <h2>{{GetUsuarioLogado.displayName}}</h2> -->
+    <h2>{{ usuarioLogado() }}</h2>
   </ion-label>
 </ion-item>
