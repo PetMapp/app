@@ -17,16 +17,18 @@ export class ButtonComponent implements OnInit {
 
   async photo() {
     try {
-      var permit = await this.camera.permission(); 
+      var permit = await this.camera.permission();
       if (permit) {
 
         var image = await this.camera.GetCamera();
-        console.log({image});
-        await this.router.navigate(["pet/register"], {
-          state: {
-            imageBase64: image
-          }
-        })
+        if (image?.base64String != undefined) {
+
+          await this.router.navigate(["pets/register"], {
+            state: {
+              imageBase64: image
+            }
+          })
+        }
       }
 
     } catch (error) {
