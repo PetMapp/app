@@ -18,7 +18,7 @@ export class CameraService {
   async GetCamera(): Promise<Photo> {
     var photo = await Camera.getPhoto({
       allowEditing: false,
-      quality: 80,
+      quality: 50,
       resultType: CameraResultType.Base64
     });
 

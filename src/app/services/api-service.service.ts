@@ -30,7 +30,7 @@ export class ApiServiceService {
     try {
       if (!anonimous) {
         var v = await this.applicationAuthorization();
-        if(v === false) return null;
+        if (v === false) return null;
       }
 
       const response = await this.axiosClient.get<ApiResponse<T>>(endpoint);
@@ -50,7 +50,7 @@ export class ApiServiceService {
     try {
       if (!anonimous) {
         var v = await this.applicationAuthorization();
-        if(v === false) return null;
+        if (v === false) return null;
       }
 
       const response: AxiosResponse<T> = await this.axiosClient.post(endpoint, data);
@@ -63,11 +63,31 @@ export class ApiServiceService {
     }
   }
 
+  async postFormData<T>(endpoint: string, data: FormData, anonimous: boolean = false): Promise<T | null> {
+    try {
+      if (!anonimous) {
+        var v = await this.applicationAuthorization();
+        if (v === false) return null;
+      }
+console.log(data);
+      const response: AxiosResponse<T> = await this.axiosClient.post(endpoint, data, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+      return response.data;
+    } catch (error) {
+      var responseError = error as AxiosError<ApiResponse<T>>;
+      this.showToast(responseError.response?.data.errorMessage || "");
+      return null;
+    }
+  }
+
   async put<T>(endpoint: string, data: any, anonimous: boolean = false): Promise<T | null> {
     try {
       if (!anonimous) {
         var v = await this.applicationAuthorization();
-        if(v == null) return null;
+        if (v == null) return null;
       }
       const response: AxiosResponse<T> = await this.axiosClient.put(endpoint, data);
       return response.data;
@@ -82,7 +102,7 @@ export class ApiServiceService {
     try {
       if (!anonimous) {
         var v = await this.applicationAuthorization();
-        if(v == null) return null;
+        if (v == null) return null;
       }
       const response: AxiosResponse<T> = await this.axiosClient.delete(endpoint, data);
       return response.data;
