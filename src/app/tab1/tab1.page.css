@@ -1,0 +1,10 @@
+.map-context {
+  position: fixed;
+}
+.map-context capacitor-google-map {
+  display: inline-block;
+  position: relative;
+  z-index: 99 !important;
+  width: 100vw;
+  height: 100vh;
+}

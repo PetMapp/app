@@ -5,9 +5,11 @@
     </ion-title>
   </ion-toolbar>
 </ion-header> -->
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="false">
   <app-header></app-header>
   <app-button></app-button> 
-  <capacitor-google-map id="map" style="display: inline-block; width: 100%; height: 100%; z-index: 99;">
-  </capacitor-google-map>
+  <div class="map-context">
+    <capacitor-google-map id="map">
+    </capacitor-google-map>
+  </div>
 </ion-content>

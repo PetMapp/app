@@ -41,13 +41,14 @@ export class GooglemapService {
           lat: 0,
           lng: 0,
         },
-        zoom: 18,
+        zoom: 12,
         styles: mapStyles,
         streetViewControl: false, // Remove o controle de street view
         mapTypeControl: false, // Remove o controle de tipo de mapa
         fullscreenControl: false, // Remove o controle de tela cheia
         zoomControl: false,
-        
+        disableDefaultUI: true,
+        clickableIcons: false
       },
     });
 
@@ -83,7 +84,105 @@ export class GooglemapService {
   }
 
   private getLightModeStyles(): google.maps.MapTypeStyle[] {
-    return [];
+    return [
+      {
+        "featureType": "administrative",
+        "elementType": "geometry",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "landscape.man_made",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#ebf4ff"
+          }
+        ]
+      },
+      {
+        "featureType": "landscape.natural",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#e09c1d"
+          }
+        ]
+      },
+      {
+        "featureType": "landscape.natural.landcover",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#abe9d0"
+          }
+        ]
+      },
+      {
+        "featureType": "landscape.natural.terrain",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#239a9c"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "transit",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+          {
+            "color": "#0091d4"
+          }
+        ]
+      }
+    ]
   }
 
   private getDarkModeStyles(): google.maps.MapTypeStyle[] {
