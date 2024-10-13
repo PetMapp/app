@@ -23,6 +23,9 @@ export class TabsPage implements OnInit {
     this.auth.validateAuth();
   }
 
+
+
+
   async ngOnInit() {
     // Obtém a rota atual
     this.currentRoute = this.router.url;
@@ -31,16 +34,6 @@ export class TabsPage implements OnInit {
     this.router.events.subscribe(async (event) => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;
-        console.log('Rota atual:', this.currentRoute);
-
-        //Tratativa de renderização do mapa
-        if (this.currentRoute != "/tabs/tab1") {
-          this.googleMapService.destroyMap();
-        } else {
-          await this.googleMapService.createMap();
-          var location = await this.locationService.getLocation();
-          this.googleMapService.setPositionCamera(location.coords.latitude, location.coords.longitude);
-        }
       }
     });
 

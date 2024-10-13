@@ -1,6 +1,4 @@
-
-body {
-    background: var(--icon-color-default) !important;
-    --ion-background-color: --icon-color-default !important;
-  }
-  
+@import "../../theme/variables.scss";
+.serioIsso {
+    --background: var(--ion-background-color) !important;
+}

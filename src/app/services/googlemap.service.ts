@@ -19,7 +19,7 @@ export class GooglemapService {
     }
   }
 
-  async createMap() {
+  async createMap(lat?: number, lng?: number) {
     var ref = document.getElementById('map');
 
     const isDarkMode =
@@ -38,11 +38,12 @@ export class GooglemapService {
       language: 'pt-BR',
       config: {
         center: {
-          lat: 0,
-          lng: 0,
+          lat: lat ?? 0,
+          lng: lng ?? 0,
         },
         zoom: 12,
         styles: mapStyles,
+        
         streetViewControl: false, // Remove o controle de street view
         mapTypeControl: false, // Remove o controle de tipo de mapa
         fullscreenControl: false, // Remove o controle de tela cheia

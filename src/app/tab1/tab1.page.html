@@ -5,9 +5,12 @@
     </ion-title>
   </ion-toolbar>
 </ion-header> -->
-<ion-content [fullscreen]="false">
+<ion-content style="background-color: transparent !important;" [fullscreen]="false">
+  <div *ngIf="Load === true">
+    <ion-skeleton-text [animated]="true" style="width: 100%; height: calc(100vh - 80px); position: absolute;" />
+  </div>
   <app-header></app-header>
-  <app-button></app-button> 
+  <app-button></app-button>
   <div class="map-context">
     <capacitor-google-map id="map">
     </capacitor-google-map>

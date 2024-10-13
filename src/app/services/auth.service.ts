@@ -123,6 +123,7 @@ export class AuthService {
       const user = await firstValueFrom(this.afAuth.user);
       if (user) {
         const idToken = await user.getIdToken();
+        console.log({idToken});
         this.api.registerHeader(idToken);
         return user;
       } else {
