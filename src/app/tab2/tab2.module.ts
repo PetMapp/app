@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { Tab2PageRoutingModule } from './tab2-routing.module';
-import { NotificacaoComponent } from '../components/notificacao/notificacao.component';
+import { PetComponent } from '../components/pet/pet.component';
 
 @NgModule({
   imports: [
@@ -15,8 +15,8 @@ import { NotificacaoComponent } from '../components/notificacao/notificacao.comp
     ExploreContainerComponentModule,
     Tab2PageRoutingModule
   ],
-  declarations: [Tab2Page, NotificacaoComponent],
-  exports: [NotificacaoComponent],
+  declarations: [Tab2Page, PetComponent],
+  exports: [PetComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class Tab2PageModule { }

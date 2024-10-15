@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { ButtonComponent } from '../components/button/button.component';
 import { HeaderComponent } from '../components/header/header.component';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { LucideAngularModule } from 'lucide-angular';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
+    LucideAngularModule
   ],
   declarations: [Tab1Page, ButtonComponent, HeaderComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

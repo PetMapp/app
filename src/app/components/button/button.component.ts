@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CameraService } from 'src/app/services/camera.service';
+import { Camera } from 'lucide-angular';
 
 @Component({
   selector: 'app-button',
@@ -8,6 +9,8 @@ import { CameraService } from 'src/app/services/camera.service';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent implements OnInit {
+
+  cameraIcon = Camera; 
 
   constructor(private camera: CameraService,
     private router: Router

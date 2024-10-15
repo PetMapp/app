@@ -10,13 +10,15 @@ import { Tab4Page } from './tab4.page';
 
 import { AvatarUsuarioComponent } from '../components/avatar-usuario/avatar-usuario.component';
 import { ItensConfigComponent } from '../components/itens-config/itens-config.component';
+import { LucideAngularModule, Palette, CircleUserRound } from 'lucide-angular';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    Tab4PageRoutingModule
+    Tab4PageRoutingModule,
+    LucideAngularModule.pick({ Palette, CircleUserRound })
   ],
   declarations: [
     ItensConfigComponent,

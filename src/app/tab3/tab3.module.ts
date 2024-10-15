@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-import { PetComponent } from '../components/pet/pet.component';
+import { NotificacaoComponent } from '../components/notificacao/notificacao.component';
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
 
@@ -16,7 +16,9 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
     ExploreContainerComponentModule,
     Tab3PageRoutingModule
   ],
-  declarations: [Tab3Page, PetComponent],
-  exports: [PetComponent]
+  declarations: [Tab3Page, NotificacaoComponent],
+  exports: [NotificacaoComponent
+
+  ]
 })
 export class Tab3PageModule {}
