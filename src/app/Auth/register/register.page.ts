@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+  nome: string = "";
   email: string = "";
   senha: string = "";
   confirmarSenha: string = "";
@@ -26,7 +27,7 @@ export class RegisterPage implements OnInit {
   }
 
   onLogin() {
-    this.navCtrl.navigateForward("/login");
+    this.navCtrl.navigateBack("/login");
   }
 
   async onRegister() {
@@ -44,7 +45,7 @@ export class RegisterPage implements OnInit {
   
       this.loading = true;
       this.loading_text = "Registrando...";
-      await this.authService.register(this.email, this.senha)
+      await this.authService.register(this.email, this.senha, this.nome);
       this.loading = false;
       setTimeout(() => {
         this.navCtrl.navigateRoot("/login");

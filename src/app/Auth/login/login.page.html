@@ -6,14 +6,14 @@
 
 <ion-content [fullscreen]="true">
   <div [ngClass]="'header-auth'">
-    <ion-icon name="paw" size="large" style="font-size: 60px; color: var(--icon-color-default);"></ion-icon>
+    
   </div>
 
 
   <div [ngClass]="'container pt-3'">
     <div class="form-gap">
       <h3 class="bold">Que bom que você voltou.</h3>
-      <ion-input label="Login" [(ngModel)]="email" [labelPlacement]="'floating'" type="email"
+      <ion-input label="E-mail" [(ngModel)]="email" [labelPlacement]="'floating'" type="email"
         fill="outline"></ion-input>
 
       <ion-input label="Senha" [(ngModel)]="senha" [labelPlacement]="'floating'" type="password"

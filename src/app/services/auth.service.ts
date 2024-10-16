@@ -6,6 +6,7 @@ import { firstValueFrom } from 'rxjs'; // Importa a função para converter obse
 import { ApiServiceService } from './api-service.service';
 import { NavController } from '@ionic/angular';
 import { GoogleAuth, User, } from '@codetrix-studio/capacitor-google-auth'
+import { updateProfile } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -74,15 +75,25 @@ export class AuthService {
     return !(window.navigator.userAgent.includes('iPhone') || window.navigator.userAgent.includes('Android'));
   }
 
-  async register(email: string, password: string): Promise<void> {
+  async register(email: string, password: string, displayName: string): Promise<void> {
     try {
-      await this.afAuth.createUserWithEmailAndPassword(email, password);
+      const userCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+
       console.log('Registro bem-sucedido!');
+
+      if (user) {
+        await updateProfile(user, { displayName });
+        console.log('Perfil atualizado com sucesso!');
+      } else {
+        console.error('Erro: usuário não encontrado após registro.');
+      }
+
     } catch (error) {
       console.error('Erro ao registrar:', error);
     }
   }
-
+  
   async login(email: string, senha: string) {
     var e = await this.afAuth.signInWithEmailAndPassword(email, senha);
     if (e.user) this.api.registerHeader(e.user.uid);
