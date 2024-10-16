@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { PetsPage } from './pets.page';
-import { PetRegisterPage } from '../pet-register/pet-register.page';
 
 const routes: Routes = [
   {
@@ -12,7 +10,11 @@ const routes: Routes = [
   {
     path: "register",
     loadChildren: () => import('../pet-register/pet-register.module').then( m => m.PetRegisterPageModule)
-  }
+  },
+  {
+    path: "pet/details",
+    loadChildren: () => import('../pet-details/pet-details.module').then( m => m.PetDetailsPageModule)
+  },
 ];
 
 @NgModule({

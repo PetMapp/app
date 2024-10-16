@@ -5,6 +5,7 @@ import { GooglemapService } from '../services/googlemap.service';
 import { Marker } from '@capacitor/google-maps';
 import { LocationService } from '../services/location.service';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -18,7 +19,8 @@ export class Tab1Page implements OnInit {
     private api: ApiServiceService,
     private auth: AuthService,
     private location: LocationService,
-    private googlemap: GooglemapService
+    private googlemap: GooglemapService,
+    private nav: Router
   ) { }
 
 
@@ -32,7 +34,7 @@ export class Tab1Page implements OnInit {
 
       //Listando todos os pets cadastrados (localizações)
       var pets = await this.api.get<PetLocationModel[]>("pet/location/all");
-      if (pets) {
+      if (pets != null && pets != undefined) {
         const markers: Marker[] = pets.map(element => ({
           coordinate: {
             lat: element.lat,
@@ -45,9 +47,7 @@ export class Tab1Page implements OnInit {
             height: 42,
           },
         }));
-        await this.googlemap.SetMarkers(markers, (d) => {
-          // {...}
-        })
+        await this.googlemap.SetMarkers(markers);
 
         await this.googlemap.SetMarkers([
           {
@@ -64,7 +64,20 @@ export class Tab1Page implements OnInit {
             title: "Você",
             isFlat: true
           }
-        ], () => {})
+        ])
+
+        await this.googlemap.SetMarkerClickCallBack((d) => {
+          if (pets != null && pets?.length > 0) {
+            var petMarkerId = parseInt(d.markerId);
+            const petItem = pets[petMarkerId];
+            this.nav.navigate(["/pets/pet/details"], {
+              state: {
+                petId: petItem.petId
+              }
+            })
+          }
+        })
+
       }
       this.Load = false;
     }

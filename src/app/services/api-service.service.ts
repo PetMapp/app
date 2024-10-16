@@ -53,8 +53,8 @@ export class ApiServiceService {
         if (v === false) return null;
       }
 
-      const response: AxiosResponse<T> = await this.axiosClient.post(endpoint, data);
-      return response.data;
+      const response = await this.axiosClient.post<ApiResponse<T>>(endpoint, data);
+      return response.data.data;
     } catch (error) {
       var responseError = error as AxiosError<ApiResponse<T>>;
       console.log(responseError);

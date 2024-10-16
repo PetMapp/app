@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GoogleMap, Marker } from '@capacitor/google-maps';
-import { MarkerClickCallbackData } from '@capacitor/google-maps/dist/typings/definitions';
+import { MapListenerCallback, MarkerClickCallbackData } from '@capacitor/google-maps/dist/typings/definitions';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class GooglemapService {
   // @ViewChild('map', { static: true }) mapRef!: ElementRef<HTMLElement>;
   newMap!: GoogleMap | null;
 
-  constructor() {}
+  constructor() { }
 
   async destroyMap() {
     if (this.newMap) {
@@ -43,7 +43,7 @@ export class GooglemapService {
         },
         zoom: 12,
         styles: mapStyles,
-        
+
         streetViewControl: false, // Remove o controle de street view
         mapTypeControl: false, // Remove o controle de tipo de mapa
         fullscreenControl: false, // Remove o controle de tela cheia
@@ -75,11 +75,16 @@ export class GooglemapService {
   }
 
   public async SetMarkers(
-    markers: Marker[],
+    markers: Marker[]) {
+    if (this.newMap) {
+      await this.newMap.addMarkers(markers);
+    }
+  }
+
+  public async SetMarkerClickCallBack(
     onClickMarker: (a: MarkerClickCallbackData) => any
   ) {
     if (this.newMap) {
-      await this.newMap?.addMarkers(markers);
       await this.newMap.setOnMarkerClickListener(onClickMarker);
     }
   }

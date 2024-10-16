@@ -4,32 +4,39 @@
   </ion-toolbar>
 </ion-header> -->
 
-  <ion-content class="context-bg" [fullscreen]="true">
-    <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 20px;">
-      <ion-img [src]="imageBase64" style="border-radius: 100%; height: 240px; width: 240px;"></ion-img>
-    </div>
+<ion-content class="context-bg" [fullscreen]="true">
+  <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 20px;">
+    <img [src]="imageBase64" class="pet-image" />
+  </div>
 
-    <ion-input [(ngModel)]="nome" label-placement="floating" fill="outline" [labelPlacement]="'floating'"
-      label="Nome/Apelido"></ion-input>
-    <br>
-    <ion-input [(ngModel)]="descricao" line="3" label-placement="floating" fill="outline" [labelPlacement]="'floating'"
-      label="Descrição" [counter]="true" maxlength="200"></ion-input>
+  <ion-input [(ngModel)]="nome" label-placement="floating" fill="outline" [labelPlacement]="'floating'"
+    label="Nome/Apelido"></ion-input>
+  <br>
+  <ion-input [(ngModel)]="descricao" line="3" label-placement="floating" fill="outline" [labelPlacement]="'floating'"
+    label="Descrição" [counter]="true" maxlength="200"></ion-input>
 
+
+
+  <ion-col>
     <ion-input [(ngModel)]="localizacao" line="3" label-placement="floating" fill="outline"
       [labelPlacement]="'floating'" label="Localização" [counter]="true" maxlength="200"></ion-input>
 
+    <ion-row class="p-0">
+      <ion-button (click)="SetLocation()" fill="outline">Setar na minha localização</ion-button>
+    </ion-row>
+  </ion-col>
 
-    <ion-select label-placement="floating" [(ngModel)]="status" fill="outline" label="Status" placeholder="Status">
-      <ion-select-option value="rua">Rua</ion-select-option>
-    </ion-select>
+  <ion-select label-placement="floating" [(ngModel)]="status" fill="outline" label="Status" placeholder="Status">
+    <ion-select-option value="rua">Rua</ion-select-option>
+  </ion-select>
 
-    <ion-loading [isOpen]="load" message="Registrando pet" spinner="crescent">
-    </ion-loading>
+  <ion-loading [isOpen]="load" message="Registrando pet" spinner="crescent">
+  </ion-loading>
 
 
-    <div style="display: flex; justify-content: end; margin-top: 20px;">
-      <ion-button (click)="back()">Cancelar</ion-button>
-      <ion-button (click)="register()">Registrar pet</ion-button>
-    </div>
+  <div style="display: flex; justify-content: end; margin-top: 20px;">
+    <ion-button (click)="back()">Cancelar</ion-button>
+    <ion-button (click)="register()">Registrar pet</ion-button>
+  </div>
 
-  </ion-content>
+</ion-content>

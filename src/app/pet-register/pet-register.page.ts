@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Photo } from '@capacitor/camera';
 import { ApiServiceService } from '../services/api-service.service';
-import { ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
+import { LocationService } from '../services/location.service';
 
 @Component({
   selector: 'app-pet-register',
@@ -21,7 +22,9 @@ export class PetRegisterPage implements OnInit {
 
   constructor(private route: Router,
     private api: ApiServiceService,
-    private toast: ToastController
+    private toast: ToastController,
+    private navController: NavController,
+    private locate: LocationService
   ) { }
 
   ngOnInit() {
@@ -36,9 +39,19 @@ export class PetRegisterPage implements OnInit {
     }
   }
 
+  async SetLocation(){
+    const location = await this.locate.getLocation();
+    const locateString = await this.api.post<string>("pet/locateByLatLng", {
+      lat: location.coords.latitude,
+      lng: location.coords.longitude
+    });
+    console.log({locateString});
+    if(locateString) this.localizacao = locateString;
+  }
 
   async back() {
-    await this.route.navigate(["tabs/tab1"], {});
+    // await this.route.navigate(["tabs/tab1"], {});
+    await this.navController.back();
   }
 
   async register() {
