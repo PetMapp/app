@@ -10,7 +10,8 @@ import { Tab4Page } from './tab4.page';
 
 import { AvatarUsuarioComponent } from '../components/avatar-usuario/avatar-usuario.component';
 import { ItensConfigComponent } from '../components/itens-config/itens-config.component';
-import { LucideAngularModule, Palette, CircleUserRound } from 'lucide-angular';
+import { LogoutButtonComponent } from 'src/app/components/logout-button/logout-button.component';
+import { LucideAngularModule, Palette, CircleUserRound,LogOut } from 'lucide-angular';
 
 @NgModule({
   imports: [
@@ -18,11 +19,12 @@ import { LucideAngularModule, Palette, CircleUserRound } from 'lucide-angular';
     FormsModule,
     IonicModule,
     Tab4PageRoutingModule,
-    LucideAngularModule.pick({ Palette, CircleUserRound })
+    LucideAngularModule.pick({ Palette, CircleUserRound,LogOut })
   ],
   declarations: [
     ItensConfigComponent,
     AvatarUsuarioComponent,
+    LogoutButtonComponent,
     Tab4Page]
 })
 export class Tab4PageModule {}
