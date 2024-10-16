@@ -29,5 +29,4 @@ export class Tab4Page implements OnInit {
       this.navCtrl.navigateRoot('/login');
     }
   }
-
 }

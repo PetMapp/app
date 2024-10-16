@@ -142,6 +142,11 @@ export class AuthService {
     const user = firebase.auth().currentUser;
     return user;
   }
+
+  Logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('usuarioLogado');
+  }
 }
 
 
