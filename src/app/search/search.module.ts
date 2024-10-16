@@ -8,12 +8,15 @@ import { SearchPageRoutingModule } from './search-routing.module';
 
 import { SearchPage } from './search.page';
 
+import { LucideAngularModule, ArrowLeft } from 'lucide-angular';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SearchPageRoutingModule
+    SearchPageRoutingModule,
+    LucideAngularModule.pick({ ArrowLeft })
   ],
   declarations: [SearchPage]
 })

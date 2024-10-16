@@ -1,6 +1,14 @@
 ion-header {
     display: flex;
+    --ion-box-shadow: none;
+    box-shadow: none;
 }
 ion-button {
-    height: auto;
+    --box-shadow: none;
+    box-shadow: none;
+}
+
+ion-searchbar {
+    --box-shadow: none;
+    box-shadow: none;
 }

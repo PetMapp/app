@@ -1,3 +1,8 @@
+ion-header {
+  --ion-box-shadow: none;
+  box-shadow: none;
+}
+
 ion-avatar {
     width: 70px;
     height: 70px;
@@ -10,7 +15,15 @@ ion-avatar {
   }
   
   ion-item {
+    background-color: transparent;
     --padding-start: 10px;
     --inner-padding-end: 10px;
   }
   
+  ion-list {
+    background-color: transparent;
+  }
+
+  ion-content {
+    background-color: transparent;
+  }
