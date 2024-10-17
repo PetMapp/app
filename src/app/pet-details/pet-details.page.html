@@ -3,23 +3,27 @@
     <ion-col>
       <ion-row class="ion-justify-content-center">
         <div class="ion-flex ion-justify-content-center">
-          <img [src]="detail?.petImage" class="pet-image" />
+          <img *ngIf="detail != null" [src]="detail.petImage" class="pet-image" />
+          <ion-skeleton-text *ngIf="detail == null" [animated]="true" class="pet-image" />
         </div>
       </ion-row>
     </ion-col>
     <ion-col>
-      <ion-input [value]="detail?.apelido" label="Apelido" readonly="true" fill="outline" label-placement="floating" />
+      <ion-input *ngIf="detail != null" [value]="detail.apelido" label="Apelido" readonly="true" fill="outline" label-placement="floating" />
+      <ion-skeleton-text [animated]="true" *ngIf="detail == null" style="width: 100%; height: 64px;" />
     </ion-col>
     <ion-col>
-      <ion-input [value]="detail?.descricao" label="Descrição" readonly="true" fill="outline"
+      <ion-input [value]="detail.descricao" *ngIf="detail != null" label="Descrição" readonly="true" fill="outline"
         label-placement="floating" />
+      <ion-skeleton-text [animated]="true" *ngIf="detail == null" style="width: 100%; height: 64px;" />
     </ion-col>
     <ion-col>
-      <ion-input [value]="detail?.localizacao" label="Localização" readonly="true" fill="outline"
+      <ion-input *ngIf="detail != null" [value]="detail.localizacao" label="Localização" readonly="true" fill="outline"
         label-placement="floating" />
+      <ion-skeleton-text [animated]="true" *ngIf="detail == null" style="width: 100%; height: 64px;" />
     </ion-col>
     <ion-col>
-      <ion-row>
+      <ion-row class="ion-justify-content-center">
         <ion-button (click)="back()">Voltar</ion-button>
       </ion-row>
     </ion-col>
