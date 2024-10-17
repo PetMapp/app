@@ -75,7 +75,7 @@ export class AuthService {
     return !(window.navigator.userAgent.includes('iPhone') || window.navigator.userAgent.includes('Android'));
   }
 
-  async register(email: string, password: string, displayName: string): Promise<void> {
+  async register(email: string, password: string, displayName: string, profilePicURL: string): Promise<void> {
     try {
       const userCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
       const user = userCredential.user;
@@ -83,7 +83,7 @@ export class AuthService {
       console.log('Registro bem-sucedido!');
 
       if (user) {
-        await updateProfile(user, { displayName });
+        await updateProfile(user, { displayName, photoURL: profilePicURL });
         console.log('Perfil atualizado com sucesso!');
       } else {
         console.error('Erro: usuário não encontrado após registro.');

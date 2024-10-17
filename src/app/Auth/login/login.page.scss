@@ -10,6 +10,17 @@
     border-radius: 0 0 10px 12px;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+ion-input {
+    margin: 5px;
+}
+
 .footer-gray {
     background: var(--ion-background-color) !important;
     border-top: solid 1px var(--hr-color);
@@ -62,32 +73,17 @@ ion-button {
     height: 100%;
     box-shadow: none;
     color: var(--icon-color-default);
-}
-
-.gradient-border {
-    position: relative;
-    background: linear-gradient(90deg, rgba(66,133,244,1) 0%, rgba(15,157,88,1) 29%, rgba(244,180,0,1) 59%, rgba(219,68,55,1) 100%);
+    border: solid 1px var(--hr-color);
     border-radius: 5px;
-    overflow: hidden;
-}
-
-.gradient-border::before {
-    content: "";
-    position: absolute;
-    top: 5px; 
-    bottom: 7px; 
-    left: 5px; 
-    right: 5px;
-    background: var(--google-button); /* cor da borda */
-    border-radius: 5px;
-    z-index: 1;
-}
-
-.gradient-border > * {
-    position: relative;
-    z-index: 2; /* faz o gradiente ficar por cima */
+    font-size: 10px;
 }
 
 .redirect{
     color: var(--ion-color-primary);
+}
+
+.logo {
+    width: 266px;
+    height: 112px;
+    background-color: transparent;
 }

@@ -10,6 +10,17 @@
     border-radius: 0 0 10px 12px;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+ion-input {
+    margin: 5px;
+}
+
 .footer-gray {
     background: var(--ion-background-color) !important;
     border-top: solid 1px var(--hr-color);

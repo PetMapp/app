@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NavController, ToastController } from '@ionic/angular';
 import { ApiServiceService } from 'src/app/services/api-service.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  logoPath: string = '';
+
   email: string = "";
   senha: string = "";
   loading: boolean = false;
@@ -20,10 +23,18 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     private authService: AuthService,
     private api: ApiServiceService,
-    private toast: ToastController
+    private toast: ToastController,
+    private theme: ThemeService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.updateLogoPath();
+   }
+
+   updateLogoPath() {
+    const currentTheme = this.theme.getTheme();
+    this.logoPath = currentTheme === 'dark' ? 'assets/logo-dark.svg' : 'assets/logo.svg';
+  }
 
   onRegister() {
     this.navCtrl.navigateForward("/register");

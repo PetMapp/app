@@ -6,40 +6,34 @@
 
 <ion-content [fullscreen]="true">
   <div [ngClass]="'header-auth'">
-    
+    <img class="logo" [src]="logoPath" alt="Logo">
   </div>
 
 
-  <div [ngClass]="'container pt-3'">
-    <div class="form-gap">
-      <h3 class="bold">Que bom que você voltou.</h3>
-      <ion-input label="E-mail" [(ngModel)]="email" [labelPlacement]="'floating'" type="email"
-        fill="outline"></ion-input>
+  <div [ngClass]="'container'">
+    <h3 class="bold">Que bom que você voltou.</h3>
+    <ion-input label="E-mail" [(ngModel)]="email" [labelPlacement]="'floating'" type="email" fill="outline"></ion-input>
 
-      <ion-input label="Senha" [(ngModel)]="senha" [labelPlacement]="'floating'" type="password"
-        fill="outline"></ion-input>
+    <ion-input label="Senha" [(ngModel)]="senha" [labelPlacement]="'floating'" type="password"
+      fill="outline"></ion-input>
 
-      <div style="width: 100%;">
-        <ion-button (click)="onLogin()">
-          <span class="button-text">Login</span>
-        </ion-button>
+    <div style="width: 100%;">
+      <ion-button (click)="onLogin()">
+        <span class="button-text">Login</span>
+      </ion-button>
 
-        <ion-loading [isOpen]="loading" [message]="loading_text" spinner="crescent">
-        </ion-loading>
+      <ion-loading [isOpen]="loading" [message]="loading_text" spinner="crescent">
+      </ion-loading>
 
-        <div class="d-flex justify-content-between w-100">
-          <div class="hr-text">
-            OU
-          </div>
-        </div>
-
-        <div class="gradient-border">
-          <ion-button class="btnGoogle" style="box-shadow: none;" color="translucent" (click)="onGoogle()">
-            <ion-icon name="logo-google" size="large" style="color: var(--icon-color-default);"></ion-icon>
-            <span class="button-text" style="color: var(--icon-color-default);">Login com o Google</span>
-          </ion-button>
+      <div class="d-flex justify-content-between w-100">
+        <div class="hr-text">
+          OU
         </div>
       </div>
+      <ion-button class="btnGoogle" style="box-shadow: none;" color="translucent" (click)="onGoogle()">
+        <ion-icon name="logo-google" size="large" style="color: var(--icon-color-default);"></ion-icon>
+        <span class="button-text" style="color: var(--icon-color-default);">Login com o Google</span>
+      </ion-button>
     </div>
   </div>
 

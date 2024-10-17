@@ -2,12 +2,17 @@ ion-header {
   position: absolute;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
   padding: 0px;
   z-index: 999;
   background-color: transparent;
   height: 50px;
   box-shadow: none !important;
+}
+
+.logo {
+  width: 125px;
+  height: 35px;
 }
 
 .search-button{

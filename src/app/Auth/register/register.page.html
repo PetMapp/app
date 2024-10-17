@@ -6,26 +6,26 @@
 
 <ion-content [fullscreen]="true">
   <div [ngClass]="'header-auth'">
-    
+    <img class="logo" [src]="logoPath" alt="Logo">
   </div>
 
 
   <div [ngClass]="'container pt-3'">
-    <div class="form-gap">
-      <h3 class="bold">Crie sua conta!</h3>
-      <ion-input label="Nome" [(ngModel)]="nome" [labelPlacement]="'floating'" type="text" fill="outline"></ion-input>
+    <h3 class="bold">Crie sua conta!</h3>
+    <ion-input label="Nome" [(ngModel)]="nome" [labelPlacement]="'floating'" type="text" fill="outline"></ion-input>
 
-      <ion-input label="E-mail" [(ngModel)]="email" [labelPlacement]="'floating'" type="email" fill="outline"></ion-input>
+    <ion-input label="E-mail" [(ngModel)]="email" [labelPlacement]="'floating'" type="email" fill="outline"></ion-input>
 
-      <ion-input label="Senha" [(ngModel)]="senha" [labelPlacement]="'floating'" type="password" fill="outline"></ion-input>
+    <ion-input label="Senha" [(ngModel)]="senha" [labelPlacement]="'floating'" type="password"
+      fill="outline"></ion-input>
 
-      <ion-input label="Confirmar senha" [(ngModel)]="confirmarSenha" [labelPlacement]="'floating'" type="password" fill="outline"></ion-input>
+    <ion-input label="Confirmar senha" [(ngModel)]="confirmarSenha" [labelPlacement]="'floating'" type="password"
+      fill="outline"></ion-input>
 
-      <div style="width: 100%;">
-        <ion-button (click)="onRegister()">
-          <span class="button-text">Registrar</span>
-        </ion-button>
-      </div>
+    <div style="width: 100%;">
+      <ion-button (click)="onRegister()">
+        <span class="button-text">Registrar</span>
+      </ion-button>
     </div>
   </div>
 
