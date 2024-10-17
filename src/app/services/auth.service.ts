@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth'
 import firebase from 'firebase/compat/app';
 import { Capacitor } from '@capacitor/core'
 import { firstValueFrom } from 'rxjs'; // Importa a função para converter observable em promise
+import { Observable } from 'rxjs';
 import { ApiServiceService } from './api-service.service';
 import { NavController } from '@ionic/angular';
 import { GoogleAuth, User, } from '@codetrix-studio/capacitor-google-auth'
@@ -114,6 +115,13 @@ export class AuthService {
     console.log(e);
     return e;
   }
+
+  // Função não assíncrona para exibir o usuário autenticado no componente Tabs
+  getUserLogged(): Observable<firebase.User | null> {
+    return this.afAuth.authState; // Retorna um Observable do usuário autenticado
+  }
+
+
 
   isSessionStorageAvailable(): boolean {
     try {
