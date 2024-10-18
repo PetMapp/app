@@ -49,11 +49,12 @@ export class GooglemapService {
         fullscreenControl: false, // Remove o controle de tela cheia
         zoomControl: false,
         disableDefaultUI: true,
-        clickableIcons: false
+        clickableIcons: true,
       },
     });
 
-    await this.newMap.enableClustering();
+    await this.newMap.disableClustering();
+    await this.newMap.enableTouch();
   }
 
   async setPositionCamera(lat: number, lng: number) {
