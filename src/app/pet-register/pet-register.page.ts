@@ -18,6 +18,7 @@ export class PetRegisterPage implements OnInit {
   public descricao?: string;
   public status?: string;
   public localizacao?: string;
+  public coleira: boolean = false;
   public load: boolean = false;
 
   constructor(private route: Router,
@@ -67,6 +68,7 @@ export class PetRegisterPage implements OnInit {
       form.append("descricao", this.descricao ?? "");
       form.append("localizacao", this.localizacao ?? "");
       form.append("status", this.status);
+      form.append("coleira", this.coleira.toString());
 
       await this.api.postFormData("pet/find/register", form);
       this.load = false;

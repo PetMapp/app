@@ -9,7 +9,8 @@
       </ion-row>
     </ion-col>
     <ion-col>
-      <ion-input *ngIf="detail != null" [value]="detail.apelido" label="Apelido" readonly="true" fill="outline" label-placement="floating" />
+      <ion-input *ngIf="detail != null" [value]="detail.apelido" label="Apelido" readonly="true" fill="outline"
+        label-placement="floating" />
       <ion-skeleton-text [animated]="true" *ngIf="detail == null" style="width: 100%; height: 64px;" />
     </ion-col>
     <ion-col>
@@ -22,6 +23,17 @@
         label-placement="floating" />
       <ion-skeleton-text [animated]="true" *ngIf="detail == null" style="width: 100%; height: 64px;" />
     </ion-col>
+    <ion-col>
+
+      <div>
+        <ion-skeleton-text [animated]="true" *ngIf="detail == null" style="width: 100%; height: 64px;" />
+        <ion-checkbox *ngIf="detail != null" disabled="true" labelPlacement="start" [checked]="detail.coleira">Esse pet possui
+          coleira</ion-checkbox>
+      </div>
+
+      <ion-skeleton-text [animated]="true" *ngIf="detail == null" style="width: 100%; height: 64px;" />
+    </ion-col>
+
     <ion-col>
       <ion-row class="ion-justify-content-center">
         <ion-button (click)="back()">Voltar</ion-button>

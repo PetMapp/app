@@ -1,3 +1,5 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+
 :root {
   --ion-color-primary: #159a9c;
   --ion-color-dark: #002333;
@@ -7,7 +9,7 @@
   --button-custom-color: #fff;
   --icon-color-default: #2b2b2b;
   --ion-background-color: #ffffff;
-  --ion-background-surface: #ffffff;
+  --ion-background-surface: #ffffff !important;
   --hr-color: rgba(0, 0, 0, 0.3);
   --google-button: #fff;
 }
@@ -17,7 +19,7 @@
     --ion-background-color: #2b2b2b !important;
     --button-custom-color: #2b2b2b !important;
     --ion-background-surface: #2b2b2b !important;
-    --icon-color-default: #f9f9f9;
+    --icon-color-default: #f9f9f9 !important;
     --google-button: #121212;
     --hr-color: rgba(255, 255, 255, 0.3);
   }
@@ -72,4 +74,20 @@ body {
 
 .context-bg {
   background: var(--ion-background-surface) !important;
+}
+
+ion-title {
+  color: var(--icon-color-default) !important;
+}
+
+ion-header {
+  background-color: var(--ion-background-surface) !important;
+}
+
+ion-toolbar {
+  background-color: var(--ion-background-surface) !important;
+}
+
+ion-title {
+  color: var(--icon-color-default) !important;
 }

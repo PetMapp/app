@@ -51,23 +51,23 @@ export class Tab1Page implements OnInit {
         }));
         await this.googlemap.SetMarkers(markers);
 
-        // await this.googlemap.SetMarkers([
-        //   {
-        //     zIndex: 9999,
-        //     coordinate: {
-        //       lat: location.coords.latitude,
-        //       lng: location.coords.longitude
-        //     },
-        //     tintColor: {
-        //       r: 21,
-        //       g: 154,
-        //       b: 156,
-        //       a: 255
-        //     },
-        //     title: "Você",
-        //     isFlat: false
-        //   }
-        // ])
+        await this.googlemap.SetMarkers([
+          {
+            zIndex: 9999,
+            coordinate: {
+              lat: location.coords.latitude,
+              lng: location.coords.longitude
+            },
+            tintColor: {
+              r: 21,
+              g: 154,
+              b: 156,
+              a: 255
+            },
+            title: "Você",
+            isFlat: false
+          }
+        ])
 
         await this.googlemap.SetMarkerClickCallBack((d) => {
           if (pets != null && pets?.length > 0) {

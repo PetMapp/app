@@ -23,6 +23,7 @@ export class PetDetailsPage implements OnInit {
       var petId: string | null = navigation.extras.state!["petId"];
       if (petId != null) {
         var detail = await this.api.get<PetdetailDTORes>(`pet/find/get/${petId}`);
+        console.log(detail);
         if(detail) {
           this.detail = detail;
         }
