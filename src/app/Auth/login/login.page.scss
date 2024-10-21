@@ -22,7 +22,8 @@ ion-input {
 }
 
 .footer-gray {
-    background: var(--ion-background-color) !important;
+    background: var(--ion-background-surface) !important;
+    color: var(--icon-color-default);
     border-top: solid 1px var(--hr-color);
     padding: 18px;
     text-align: center;
@@ -35,26 +36,13 @@ ion-input {
 }
 
 .hr-text {
+    width: 100%;
     display: flex;
     align-items: center;
-    text-align: center;
+    justify-content: center;
     margin: 20px 0;
 }
 
-.hr-text::before,
-.hr-text::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid var(--hr-color);
-}
-
-.hr-text:not(:empty)::before {
-    margin-right: 10px;
-}
-
-.hr-text:not(:empty)::after {
-    margin-left: 10px;
-}
 
 ion-button {
     width: 100%;

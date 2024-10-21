@@ -8,6 +8,7 @@ import { ApiServiceService } from './api-service.service';
 import { NavController } from '@ionic/angular';
 import { GoogleAuth, User, } from '@codetrix-studio/capacitor-google-auth'
 import { updateProfile } from 'firebase/auth';
+import { getAuth, fetchSignInMethodsForEmail } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -46,16 +47,16 @@ export class AuthService {
       try {
         // Para Android (ou dispositivos móveis)
         var user = await GoogleAuth.signIn();
-          
-            // Usa o token de autenticação do Google para gerar a credencial no Firebase
-            const credential = firebase.auth.GoogleAuthProvider.credential(user.authentication.idToken);
-            // Realiza o login no Firebase com o credential gerado
-            await this.afAuth.signInWithCredential(credential);
 
-            console.log(user);
-            console.log('Login com Google no Android/iOS realizado com sucesso!');
-          
-            return user.id;
+        // Usa o token de autenticação do Google para gerar a credencial no Firebase
+        const credential = firebase.auth.GoogleAuthProvider.credential(user.authentication.idToken);
+        // Realiza o login no Firebase com o credential gerado
+        await this.afAuth.signInWithCredential(credential);
+
+        console.log(user);
+        console.log('Login com Google no Android/iOS realizado com sucesso!');
+
+        return user.id;
       } catch (error) {
         return null;
       }
@@ -76,6 +77,27 @@ export class AuthService {
     return !(window.navigator.userAgent.includes('iPhone') || window.navigator.userAgent.includes('Android'));
   }
 
+  // Checa e-mail
+  async checkEmail(email: string): Promise<boolean> {
+    const auth = getAuth();
+    try {
+      const signInMethods = await fetchSignInMethodsForEmail(auth,email);
+      console.log('Métodos de login encontrados:', signInMethods);
+      
+      if (signInMethods.length > 0) {
+        console.log('Email está registrado.');
+        return true; // Email encontrado
+      } else {
+        console.log('Email não está registrado.');
+        return false; // Email não encontrado
+      }
+    } catch (error) {
+      console.error('Erro ao verificar email:', error);
+      return false; // Em caso de erro, retorna false
+    }
+  }
+
+  // Função de registro
   async register(email: string, password: string, displayName: string, profilePicURL: string): Promise<void> {
     try {
       const userCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
@@ -92,9 +114,10 @@ export class AuthService {
 
     } catch (error) {
       console.error('Erro ao registrar:', error);
+      throw error; 
     }
   }
-  
+
   async login(email: string, senha: string) {
     var e = await this.afAuth.signInWithEmailAndPassword(email, senha);
     if (e.user) this.api.registerHeader(e.user.uid);
@@ -142,7 +165,7 @@ export class AuthService {
       const user = await firstValueFrom(this.afAuth.user);
       if (user) {
         const idToken = await user.getIdToken();
-        console.log({idToken});
+        console.log({ idToken });
         this.api.registerHeader(idToken);
         return user;
       } else {
@@ -157,7 +180,7 @@ export class AuthService {
   }
   usuarioLogado: any = null;
 
-  getUsuarioLogado () {
+  getUsuarioLogado() {
     const user = firebase.auth().currentUser;
     return user;
   }

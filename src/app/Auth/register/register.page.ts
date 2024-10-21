@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ThemeService } from 'src/app/services/theme.service';
 import { AvatarService } from 'src/app/services/avatar.service';
 import { Subscription } from 'rxjs';
+import { FirebaseError } from 'firebase/app';
 
 @Component({
   selector: 'app-register',
@@ -56,35 +57,82 @@ export class RegisterPage implements OnInit {
     this.navCtrl.navigateBack("/login");
   }
 
+
   async onRegister() {
-    try {
-      if (this.senha !== this.confirmarSenha) {
-        const toast = await this.toast.create({
-          message: "As senhas não coincidem",
-          duration: 3000, 
-          position: 'bottom',
-          color: 'danger'
-        });
-        await toast.present();
-        return;
-      }
-  
-      this.loading = true;
-      this.loading_text = "Registrando...";
-      await this.authService.register(this.email, this.senha, this.nome, this.photoUrl);
-      this.loading = false;
-      setTimeout(() => {
-        this.navCtrl.navigateRoot("/login");
-      }, 400);
-    } catch (error) {
-      await this.toast.create({
-        message: "E-mail ou senha inválido",
+    // Checa se senhas são iguais
+    if (this.senha !== this.confirmarSenha) {
+      const toast = await this.toast.create({
+        message: "As senhas não coincidem",
         duration: 3000,
         position: 'bottom',
         color: 'danger'
       });
+      await toast.present();
+      return;
     }
-    this.loading = false;
+
+    // Checa tamanho da senha
+    if (this.senha.length < 6) {
+      const toast = await this.toast.create({
+        message: "A senha deve ter pelo menos 6 caracteres.",
+        duration: 3000,
+        position: 'bottom',
+        color: 'danger'
+      });
+      await toast.present();
+      return;
+    }
+
+    try {
+      this.loading = true;
+      this.loading_text = "Registrando...";
+
+      await this.authService.register(this.email, this.senha, this.nome, this.photoUrl);
+
+      this.loading = false;
+
+      const toast = await this.toast.create({
+        message: 'Registro feito com sucesso.',
+        duration: 3000,
+        position: 'bottom',
+        color: 'success'
+      });
+
+      await toast.present();
+
+      setTimeout(() => {
+        this.navCtrl.navigateRoot("/login");
+      }, 400);
+
+    } catch (error) {
+      console.error('Erro ao registrar:', error); // Loga o erro no console
+
+      let errorMessage = "Ocorreu um erro ao registrar.";
+      if (error instanceof FirebaseError) {
+        switch (error.code) {
+          case 'auth/invalid-email':
+            errorMessage = "Formato de email inválido.";
+            break;
+          case 'auth/email-already-in-use':
+            errorMessage = "Este email já está em uso.";
+            break;
+          default:
+            errorMessage = "Erro desconhecido. Tente novamente.";
+        }
+      }
+
+      const toast = await this.toast.create({
+        message: errorMessage,
+        duration: 3000,
+        position: 'bottom',
+        color: 'danger'
+      });
+
+      await toast.present();
+    } finally {
+      this.loading = false; // Garante que o loading será definido como false
+    }
   }
+
 
 }

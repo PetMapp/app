@@ -22,7 +22,8 @@ ion-input {
 }
 
 .footer-gray {
-    background: var(--ion-background-color) !important;
+    background: var(--ion-background-surface) !important;
+    color: var(--icon-color-default);
     border-top: solid 1px var(--hr-color);
     padding: 18px;
     text-align: center;

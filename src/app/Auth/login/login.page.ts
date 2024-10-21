@@ -60,12 +60,14 @@ export class LoginPage implements OnInit {
         this.navCtrl.navigateRoot("/tabs/tab1");
       }, 400);
     } catch (error) {
-      await this.toast.create({
-        message: "Login ou senha inválido",
+      const toast = await this.toast.create({
+        message: "E-mail ou senha inválido",
         duration: 3000,
         position: 'bottom',
         color: 'danger'
-      })
+      });
+
+      await toast.present();
     }
     this.loading = false;
   }
