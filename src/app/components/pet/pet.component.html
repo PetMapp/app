@@ -1,8 +1,11 @@
-<ion-card>
-  <div class="pet-container">
-    <div class="user-foto"></div>
+
+<ion-card *ngFor="let pet of pets">
+  <div class="pet-container" (click)="goToDetails(pet.id)">
+    <div class="user-foto">
+      <img *ngIf="pet.photoUrl" [src]="pet.photoUrl" alt="Foto do Pet {{ pet.apelido }}" />
+    </div>
     <ion-card-content>
-      <span class="petNome">Nome do pet</span>
+      <span class="petNome">{{ pet.apelido }}</span>
     </ion-card-content>
 
   </div>

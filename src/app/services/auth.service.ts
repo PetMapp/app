@@ -3,12 +3,13 @@ import { AngularFireAuth } from '@angular/fire/compat/auth'
 import firebase from 'firebase/compat/app';
 import { Capacitor } from '@capacitor/core'
 import { firstValueFrom } from 'rxjs'; // Importa a função para converter observable em promise
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { ApiServiceService } from './api-service.service';
 import { NavController } from '@ionic/angular';
 import { GoogleAuth, User, } from '@codetrix-studio/capacitor-google-auth'
 import { updateProfile } from 'firebase/auth';
 import { getAuth, fetchSignInMethodsForEmail } from "firebase/auth";
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -81,9 +82,9 @@ export class AuthService {
   async checkEmail(email: string): Promise<boolean> {
     const auth = getAuth();
     try {
-      const signInMethods = await fetchSignInMethodsForEmail(auth,email);
+      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
       console.log('Métodos de login encontrados:', signInMethods);
-      
+
       if (signInMethods.length > 0) {
         console.log('Email está registrado.');
         return true; // Email encontrado
@@ -114,7 +115,7 @@ export class AuthService {
 
     } catch (error) {
       console.error('Erro ao registrar:', error);
-      throw error; 
+      throw error;
     }
   }
 
@@ -142,6 +143,20 @@ export class AuthService {
   // Função não assíncrona para exibir o usuário autenticado no componente Tabs
   getUserLogged(): Observable<firebase.User | null> {
     return this.afAuth.authState; // Retorna um Observable do usuário autenticado
+  }
+
+  // Função para obter o token de autenticação do usuário logado
+  getUserToken(): Observable<string | null> {
+    return this.afAuth.authState.pipe(
+      switchMap((user) => {
+        if (user) {
+          // Obtém o token de autenticação se o usuário estiver logado
+          return from(user.getIdToken());
+        } else {
+          return from([null]);
+        }
+      })
+    );
   }
 
 

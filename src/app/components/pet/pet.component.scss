@@ -20,6 +20,9 @@ ion-card {
 }
 
 .user-foto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -33,7 +36,9 @@ ion-card-content {
 }
 
 .petNome {
+    font-size: 20px;
     font-weight: bold;
+    padding-left: 5px;
 }
 
 hr {
