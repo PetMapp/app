@@ -90,3 +90,8 @@ ion-toolbar {
 ion-title {
   color: var(--icon-color-default) !important;
 }
+
+ion-item {
+  --background: transparent;
+  --color: inherit; // Mantém a cor do texto conforme o contexto
+}
