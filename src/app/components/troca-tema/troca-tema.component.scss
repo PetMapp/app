@@ -1,0 +1,59 @@
+ion-item {
+    --inner-padding-end: 0;
+  }
+  
+  ion-label h2 {
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--ion-text-color, #333); 
+    margin-bottom: 8px;
+  }
+  
+  ion-label strong {
+    font-size: 1rem;
+    color: var(--ion-text-color, #000); 
+  }
+  
+  ion-toggle {
+    --handle-background: #fff;
+    --handle-border-radius: 50%;
+    --background-checked: #000;
+    --background: #ccc;
+    --width: 48px;
+    --height: 24px;
+  }
+  
+  .dark ion-label h2,
+  .dark ion-label strong {
+    color: #fff; 
+  }
+  
+  .dark ion-toggle {
+    --background: #666;
+    --background-checked: #fff;
+  }
+  
+  ion-icon {
+    font-size: 0.9rem;
+  }
+
+  ion-item {
+    display: flex;
+    align-items: center; /* Alinha verticalmente no centro */
+    justify-content: space-between; /* Deixa o label e o toggle próximos */
+    --inner-padding-end: 10; /* Remove o padding final */
+  }
+  
+  ion-label {
+    margin-right: 8px; /* Ajuste esse valor para controlar a distância */
+  }
+  
+  ion-toggle {
+    --handle-background: #fff;
+    --handle-border-radius: 50%;
+    --background-checked: #000;
+    --background: #ccc;
+    --width: 48px;
+    --height: 24px;
+  }
+  

@@ -1,0 +1,11 @@
+
+  <ion-item lines="none">
+    <ion-label>
+      <strong>Tema</strong>
+    </ion-label>
+    <ion-toggle slot="end" (ionChange)="trocarTema($event)" [checked]="temaEscuro">
+      <ion-icon slot="checked" name="sunny" color="light"></ion-icon>
+      <ion-icon slot="unchecked" name="moon" color="dark"></ion-icon>
+    </ion-toggle>
+  </ion-item>
+  

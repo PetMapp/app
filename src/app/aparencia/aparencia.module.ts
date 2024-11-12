@@ -8,6 +8,8 @@ import { AparenciaPageRoutingModule } from './aparencia-routing.module';
 
 import { AparenciaPage } from './aparencia.page';
 
+import { TrocaTemaComponent } from 'src/app/components/troca-tema/troca-tema.component'; // Caminho correto
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,6 @@ import { AparenciaPage } from './aparencia.page';
     IonicModule,
     AparenciaPageRoutingModule
   ],
-  declarations: [AparenciaPage]
+  declarations: [AparenciaPage,TrocaTemaComponent]
 })
 export class AparenciaPageModule {}
