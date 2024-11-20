@@ -6,14 +6,16 @@ import { Tab2Page } from './tab2.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { PetComponent } from '../components/pet/pet.component';
-
+import { LucideAngularModule } from 'lucide-angular';
+import { Frown } from 'lucide-angular';
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab2PageRoutingModule
+    Tab2PageRoutingModule,
+    LucideAngularModule.pick({ Frown })
   ],
   declarations: [Tab2Page, PetComponent],
   exports: [PetComponent],
