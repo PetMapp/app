@@ -24,10 +24,6 @@ const routes: Routes = [
         loadChildren: () => import('../tab4/tab4.module').then(m => m.Tab4PageModule)
       },
       {
-        path: 'aparencia',
-        loadChildren: () => import('../aparencia/aparencia.module').then(m => m.AparenciaPageModule)
-      },
-      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

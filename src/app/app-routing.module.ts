@@ -33,11 +33,15 @@ const routes: Routes = [
   {
     path: 'pet-details',
     loadChildren: () => import('./pet-details/pet-details.module').then( m => m.PetDetailsPageModule)
-  },  {
-    path: 'aparencia',
-    loadChildren: () => import('./aparencia/aparencia.module').then( m => m.AparenciaPageModule)
   },
-
+  {
+    path: 'about',
+    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+  },
+  {
+    path: 'aparencia',
+    loadChildren: () => import('./aparencia/aparencia.module').then(m => m.AparenciaPageModule)
+  },
 
 ];
 @NgModule({

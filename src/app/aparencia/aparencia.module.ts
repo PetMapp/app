@@ -10,12 +10,15 @@ import { AparenciaPage } from './aparencia.page';
 
 import { TrocaTemaComponent } from 'src/app/components/troca-tema/troca-tema.component'; // Caminho correto
 
+import { LucideAngularModule, ArrowLeft} from 'lucide-angular';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AparenciaPageRoutingModule
+    AparenciaPageRoutingModule,
+    LucideAngularModule.pick({ ArrowLeft })
   ],
   declarations: [AparenciaPage,TrocaTemaComponent]
 })

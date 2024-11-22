@@ -3,6 +3,10 @@ ion-header {
   box-shadow: none;
 }
 
+ion-content {
+  background-color: var(--ion-background-color);
+}
+
 ion-avatar {
     width: 70px;
     height: 70px;

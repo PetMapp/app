@@ -11,7 +11,7 @@ import { Tab4Page } from './tab4.page';
 import { AvatarUsuarioComponent } from '../components/avatar-usuario/avatar-usuario.component';
 import { ItensConfigComponent } from '../components/itens-config/itens-config.component';
 import { LogoutButtonComponent } from 'src/app/components/logout-button/logout-button.component';
-import { LucideAngularModule, Palette, CircleUserRound,LogOut } from 'lucide-angular';
+import { LucideAngularModule, Palette, CircleUserRound, Info, LogOut } from 'lucide-angular';
 
 @NgModule({
   imports: [
@@ -19,7 +19,7 @@ import { LucideAngularModule, Palette, CircleUserRound,LogOut } from 'lucide-ang
     FormsModule,
     IonicModule,
     Tab4PageRoutingModule,
-    LucideAngularModule.pick({ Palette, CircleUserRound,LogOut })
+    LucideAngularModule.pick({ Palette, CircleUserRound, Info, LogOut })
   ],
   declarations: [
     ItensConfigComponent,

@@ -1,11 +1,13 @@
 ion-avatar {
     width: 100px;
     height: 100px;
+    background-color: var(--ion-background-color);
   }
   
   ion-item {
     --padding-start: 15px;
     --inner-padding-end: 10px;
+    background-color: var(--ion-background-color);
   }
   
   ion-label h2 {

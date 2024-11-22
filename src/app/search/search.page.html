@@ -1,6 +1,40 @@
 <ion-header>
-  <ion-button class="search-button" (click)="toTab1()">
-    <lucide-icon name="arrow-left" size="32" style="color: var(--icon-color-default);"></lucide-icon>
-  </ion-button>
-  <ion-searchbar placeholder="Pesquisar..."></ion-searchbar>
+    <ion-buttons>
+      <ion-button (click)="toTab1()">
+        <lucide-icon name="arrow-left" size="32" style="color: var(--icon-color-default);"></lucide-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-searchbar placeholder="Pesquisar..." (ionInput)="onSearch($event)">
+    </ion-searchbar>
 </ion-header>
+
+<ion-content>
+  <!-- Indicador de carregamento -->
+  <div class="spinner-container">
+    <ion-spinner *ngIf="isLoading" class="loading-spinner"></ion-spinner>
+  </div>
+
+
+  <!-- Mensagem quando nenhum resultado for encontrado -->
+  <div class="no-results-container" *ngIf="!isLoading && searchStarted && filteredPets.length === 0">
+    <div class="no-results">
+      <lucide-icon name="frown" size="48" class="cat-icon"></lucide-icon>
+      <p>Nenhum resultado encontrado.</p>
+    </div>
+
+  </div>
+
+  <!-- Lista de pets filtrados -->
+  <ion-card *ngFor="let pet of filteredPets">
+    <div class="pet-container" (click)="goToDetails(pet.id)">
+      <div class="user-foto">
+        <img *ngIf="pet.imageUrl" [src]="pet.imageUrl" alt="Foto do Pet {{ pet.apelido }}" />
+      </div>
+      <ion-card-content>
+        <span class="petNome">{{ pet.apelido }}</span>
+      </ion-card-content>
+
+    </div>
+    <hr />
+  </ion-card>
+</ion-content>

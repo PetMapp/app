@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GoogleMap, Marker } from '@capacitor/google-maps';
 import { MapListenerCallback, MarkerClickCallbackData } from '@capacitor/google-maps/dist/typings/definitions';
 import { environment } from 'src/environments/environment';
+import { ThemeService } from './theme.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,9 @@ export class GooglemapService {
   // @ViewChild('map', { static: true }) mapRef!: ElementRef<HTMLElement>;
   newMap!: GoogleMap | null;
 
-  constructor() { }
+  constructor(
+    private theme: ThemeService
+  ) { }
 
   async destroyMap() {
     if (this.newMap) {
@@ -22,12 +25,10 @@ export class GooglemapService {
   async createMap(lat?: number, lng?: number) {
     var ref = document.getElementById('map');
 
-    const isDarkMode =
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const currentTheme = this.theme.getTheme();
 
-    const mapStyles = isDarkMode
-      ? this.getDarkModeStyles()
+      const mapStyles = currentTheme === 'dark' 
+      ? this.getDarkModeStyles() 
       : this.getLightModeStyles();
 
     this.newMap = await GoogleMap.create({

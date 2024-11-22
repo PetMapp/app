@@ -1,0 +1,52 @@
+<ion-header class="header">
+  <ion-button class="search-button" (click)="toTab4()">
+    <lucide-icon name="arrow-left" size="32" style="color: var(--icon-color-default);"></lucide-icon>
+
+  </ion-button>
+  <ion-title>Grupo</ion-title>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="photos">
+    <div class="photo">
+      <img src="../../assets/edu.jpeg" alt="" class="int1">
+    </div>
+    <span style="color: var(--icon-color-default)">Eduardo Oliveira</span>
+    <div class="links">
+      <ion-button class="link-button" (click)="openLink('https://github.com/eduardo14rj')">
+        <lucide-icon name="github" size="32" style="color: var(--icon-color-default);"></lucide-icon>
+      </ion-button>
+      <ion-button class="link-button" (click)="openLink('https://www.linkedin.com/in/eduardooliveira22/')">
+        <lucide-icon name="linkedin" size="32" style="color: var(--icon-color-default);"></lucide-icon>
+      </ion-button>
+    </div>
+  </div>
+  <div class="photos">
+    <div class="photo">
+      <img src="https://avatars.githubusercontent.com/u/66232093?v=4" alt="">
+    </div>
+    <span style="color: var(--icon-color-default)">Gustavo Graciano</span>
+    <div class="links">
+      <ion-button class="link-button" (click)="openLink('https://github.com/gustahh')">
+        <lucide-icon name="github" size="32" style="color: var(--icon-color-default);"></lucide-icon>
+      </ion-button>
+      <ion-button class="link-button" (click)="openLink('https://www.linkedin.com/in/gustavo-graciano/')">
+        <lucide-icon name="linkedin" size="32" style="color: var(--icon-color-default);"></lucide-icon>
+      </ion-button>
+    </div>
+  </div>
+  <div class="photos">
+    <div class="photo">
+      <img src="https://avatars.githubusercontent.com/u/180874254?v=4" alt="">
+    </div>
+    <span style="color: var(--icon-color-default)">Pablo Vitor</span>
+    <div class="links">
+      <ion-button class="link-button" (click)="openLink('https://github.com/pabloaraujo2003')">
+        <lucide-icon name="github" size="32" style="color: var(--icon-color-default);"></lucide-icon>
+      </ion-button>
+      <ion-button class="link-button" (click)="openLink('https://www.linkedin.com/in/pablo-ara%C3%BAjo-46364a23b/')">
+        <lucide-icon name="linkedin" size="32" style="color: var(--icon-color-default);"></lucide-icon>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,31 @@
+.header {
+    display: flex;
+    --box-shadow: none;
+    box-shadow: none;
+}
+
+ion-button {
+    --box-shadow: none;
+    box-shadow: none;
+}
+
+.photos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    padding: 10px;
+}
+
+.photo {
+    width: 200px;
+    height: 200px;
+    background-color: transparent;
+    border-radius: 300px;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+
+.int1 {
+    margin: -50px 0px;
+}

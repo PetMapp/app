@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-aparencia',
   templateUrl: './aparencia.page.html',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AparenciaPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private nav:NavController
+  ) { }
 
   ngOnInit() {
+  }
+
+  toTab4() {
+    this.nav.navigateBack('/tabs/tab4');
   }
 
 }

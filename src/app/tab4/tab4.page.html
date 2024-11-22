@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content class="context-bg">
-  <ion-list lines="full">
+  <ion-list lines="none">
     <app-avatar-usuario 
     [userName]="'Nome do usuário'">
   </app-avatar-usuario>
@@ -13,13 +13,19 @@
     <app-itens-config 
       icon="palette" 
       label="Aparência" 
-      [routerLink]="['/tabs/aparencia']">
+      [routerLink]="['/aparencia']">
     </app-itens-config >
 
     <app-itens-config  
       icon="circle-user-round" 
       label="Informações do usuário" 
       link="#">
+    </app-itens-config >
+
+    <app-itens-config  
+      icon="info" 
+      label="Grupo" 
+      link="/about">
     </app-itens-config >
 
     <app-logout-button></app-logout-button>

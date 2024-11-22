@@ -1,1 +1,12 @@
 @import 'src/theme/variables';
+
+.header {
+    display: flex;
+    --box-shadow: none;
+    box-shadow: none;
+}
+
+ion-button {
+    --box-shadow: none;
+    box-shadow: none;
+}

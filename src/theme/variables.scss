@@ -1,6 +1,7 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
 :root {
+  --tab-background: #f5f5f5;
   --ion-color-primary: #159a9c;
   --ion-color-dark: #002333;
   --footer-gray: #f9f9f9;
@@ -8,33 +9,29 @@
   --ion-border: #000;
   --button-custom-color: #fff;
   --icon-color-default: #2b2b2b;
-  --ion-background-color: #ffffff;
+  --ion-background-color: #ffffff !important;
   --ion-background-surface: #ffffff !important;
   --hr-color: rgba(0, 0, 0, 0.3);
   --google-button: #fff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root { 
-    --ion-background-color: #2b2b2b !important;
-    --button-custom-color: #2b2b2b !important;
-    --ion-background-surface: #2b2b2b !important;
-    --icon-color-default: #f9f9f9 !important;
-    --google-button: #121212;
-    --hr-color: rgba(255, 255, 255, 0.3);
-  }
-
-  .ion-overlay-wrapper {
-    background-color: var(--ion-background-color) !important;
-    --ion-background-color: #2b2b2b !important;
-  }
+/* Variáveis específicas para o tema escuro */
+body[color-theme='dark'] {
+  --ion-background-color: #2b2b2b;
+  --button-custom-color: #2b2b2b;
+  --ion-background-surface: #2b2b2b;
+  --icon-color-default: #f9f9f9;
+  --google-button: #121212;
+  --hr-color: rgba(255, 255, 255, 0.3);
+  --tab-background: #2b2b2b;
 }
 
+/* Estilo para o conteúdo do overlay */
 .ion-overlay-wrapper {
   background-color: var(--ion-background-color) !important;
-  --ion-background-color: #fff;
 }
 
+/* Estilo do botão customizado */
 .custom-button {
   --background: var(--button-custom-color);
   --color: var(--ion-background-color);
@@ -87,13 +84,7 @@ ion-toolbar {
   background-color: var(--ion-background-surface) !important;
 }
 
-ion-title {
-  color: var(--icon-color-default) !important;
-}
-
 ion-item {
   --background: transparent;
   --color: inherit; // Mantém a cor do texto conforme o contexto
 }
-
-
