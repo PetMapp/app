@@ -1,59 +1,25 @@
-ion-item {
-    --inner-padding-end: 0;
-  }
-  
-  ion-label h2 {
-    font-size: 1rem;
-    font-weight: normal;
-    color: var(--ion-text-color, #333); 
-    margin-bottom: 8px;
-  }
-  
-  ion-label strong {
-    font-size: 1rem;
-    color: var(--ion-text-color, #000); 
-  }
-  
-  ion-toggle {
-    --handle-background: #fff;
-    --handle-border-radius: 50%;
-    --background-checked: #000;
-    --background: #ccc;
-    --width: 48px;
-    --height: 24px;
-  }
-  
-  .dark ion-label h2,
-  .dark ion-label strong {
-    color: #fff; 
-  }
-  
-  .dark ion-toggle {
-    --background: #666;
-    --background-checked: #fff;
-  }
-  
-  ion-icon {
-    font-size: 0.9rem;
-  }
+span {
+  color: var(--icon-color-default);
+  opacity: 80%;
+}
 
-  ion-item {
-    display: flex;
-    align-items: center; /* Alinha verticalmente no centro */
-    justify-content: space-between; /* Deixa o label e o toggle próximos */
-    --inner-padding-end: 10; /* Remove o padding final */
-  }
-  
-  ion-label {
-    margin-right: 8px; /* Ajuste esse valor para controlar a distância */
-  }
-  
-  ion-toggle {
-    --handle-background: #fff;
-    --handle-border-radius: 50%;
-    --background-checked: #000;
-    --background: #ccc;
-    --width: 48px;
-    --height: 24px;
-  }
-  
+body[color-theme="dark"] {
+  --icon-color-default: #f9f9f9;
+}
+
+.custom-toggle {
+  --track-background: #E9E9E9;
+  --handle-background: var(--ion-color-medium); /* Cor do botão no estado desligado */
+  --checked-handle-background: var(--ion-color-primary-contrast); /* Cor do botão no estado ativo */
+  --width: 50px; /* Largura do toggle */
+  --height: 25px; /* Altura do toggle */
+}
+
+.custom-toggle::part(track) {
+  border-radius: 12px; /* Bordas arredondadas */
+  transition: background-color 0.3s ease; /* Transição suave ao alternar */
+}
+
+.custom-toggle:checked::part(track) {
+  background: #159A9C !important; /* Trilho ativo */
+}

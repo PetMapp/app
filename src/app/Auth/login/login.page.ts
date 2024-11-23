@@ -33,7 +33,8 @@ export class LoginPage implements OnInit {
 
    updateLogoPath() {
     const currentTheme = this.theme.getTheme();
-    this.logoPath = currentTheme === 'dark' ? 'assets/logo-dark.svg' : 'assets/logo.svg';
+    console.log('O tema é:', currentTheme);
+    this.logoPath = currentTheme === 'light' ?  'assets/logo.svg' : 'assets/logo-dark.svg';
   }
 
   onRegister() {

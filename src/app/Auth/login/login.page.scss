@@ -19,6 +19,15 @@
 
 ion-input {
     margin: 5px;
+    color: var(--icon-color-default);
+}
+
+.bold {
+    color: var(--icon-color-default);
+}
+
+body[color-theme="dark"] {
+    --icon-color-default: #f9f9f9;
 }
 
 .footer-gray {
@@ -43,7 +52,6 @@ ion-input {
     margin: 20px 0;
 }
 
-
 ion-button {
     width: 100%;
     color: #fff;
@@ -66,7 +74,7 @@ ion-button {
     font-size: 10px;
 }
 
-.redirect{
+.redirect {
     color: var(--ion-color-primary);
 }
 
@@ -75,3 +83,6 @@ ion-button {
     height: 112px;
     background-color: transparent;
 }
+
+
+

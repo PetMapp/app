@@ -13,6 +13,7 @@
   --ion-background-surface: #ffffff !important;
   --hr-color: rgba(0, 0, 0, 0.3);
   --google-button: #fff;
+  --ion-text-color: #2b2b2b;
 }
 
 /* Variáveis específicas para o tema escuro */
@@ -24,6 +25,7 @@ body[color-theme='dark'] {
   --google-button: #121212;
   --hr-color: rgba(255, 255, 255, 0.3);
   --tab-background: #2b2b2b;
+  --ion-text-color: #f9f9f9;
 }
 
 /* Estilo para o conteúdo do overlay */
