@@ -5,3 +5,11 @@
     border-radius: 99px !important;
     object-fit: cover;
 }
+
+ion-input {
+    color: var(--ion-color-dark);
+}
+
+body[color-theme='dark'] {
+    --ion-color-dark: #f9f9f9;
+}
